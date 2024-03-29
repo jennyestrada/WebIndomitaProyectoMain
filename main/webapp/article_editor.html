@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css/styles.css">
+
+</head>
+<body>
+    <nav>
+        <div class="header-logo" >
+         <img class="responsive-image" src="/imagenes/logo indomita.png" alt="logo indomita">
+         </div>
+         <div>
+             <ul class="nav-links"> 
+                <li ><a href="#"><p>Cerrar sesión</p></a></li>
+ 
+              </ul>
+         
+         </div>
+        
+     </nav>
+
+        <div class="container">
+            <h1 class="main-title">CREAR ARTICULO</h1>
+            
+        
+
+                <div class="content-box">
+
+
+                    <form action="ServletArticle" method="post" class="width-100 d-block">
+                        <div class="row">
+                            <div class="flex-column--15">
+                                <label for="comment">Titulo</label> 
+                            </div>  
+                            <div class="flex-column--85 comment-box main-paragraph">
+                                <textarea class="width-100  border-field" name="title" placeholder="Escribir articulo...."></textarea>
+                            </div>                          
+                        </div>      
+
+                       
+                      
+                       
+                            <div class="row">
+                                <div class="flex-column--15">
+                                    <label for="comment">Texto</label> 
+                                </div>  
+                                <div class="flex-column--85  comment-box main-paragraph ">
+                                    <textarea class="width-100  border-field" name="text" placeholder="Escribir quienes somos...."></textarea>
+                                </div>                          
+                            </div>                
+                        
+                        
+
+                            <div class="row">
+                    
+                                <div class="flex-column--15">
+                                    <label>Subir imagen</label>
+                                   
+                                 </div> 
+                                 <div class="flex-column--85">
+                                    <input type="file" name="image"> 
+                                 </div> 
+                                 <button class="primary-button mt-15"   type="submit">Publicar articulo</button>
+                                  
+                        </form>
+                        
+                        
+                </div>
+
+                
+
+            </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="footer-container">
+        <h3>INDOMITA CREATIVA</h3>
+            <p>Contacto:</p>
+            <p>indomita@indomita.es</p>
+                <div class="footer-container__row">
+                    <p>
+                        <a href="#">Política de privacidad</a>
+                    </p>
+                    <p>
+                        <a href="#">Política de cookies</a>
+                    </p> 
+                    <p>
+                        <a href="#">Aviso legaL</a>
+                    </p>        
+                </div>
+
+
+        </div>   
+</body>
+</html>
