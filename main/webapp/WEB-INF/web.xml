@@ -39,4 +39,14 @@
     <servlet-name>ServletArticle</servlet-name>
     <url-pattern>/ServletArticle</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletWhoWA</display-name>
+    <servlet-name>ServletWhoWA</servlet-name>
+    <servlet-class>controlador.ServletWhoWA</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletWhoWA</servlet-name>
+    <url-pattern>/ServletWhoWA</url-pattern>
+  </servlet-mapping>
 </web-app>

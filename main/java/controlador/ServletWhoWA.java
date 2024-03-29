@@ -5,21 +5,21 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modelo.ArticleEditor;
+import modelo.WhoWAEditor;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Servlet implementation class ServletArticle
+ * Servlet implementation class ServletWhoWA
  */
-public class ServletArticle extends HttpServlet {
+public class ServletWhoWA extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletArticle() {
+    public ServletWhoWA() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,24 +37,25 @@ public class ServletArticle extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// request solo lo lee como string 
+		
+		//AQUII REQUEST.REQUEST..REQUEST
 		
 		String title = request.getParameter("title");
 		String text = request.getParameter("text");
 		String image = request.getParameter("image");// hace falta el path
 		
-		System.out.println(title + text + image );
+		System.out.println(title + text + image);
 		
-		ArticleEditor articleeditor = new ArticleEditor (title,text,image);
+		WhoWAEditor whowaeditor = new WhoWAEditor(title,text,image);
 		
 		try {
-			articleeditor.insert();
+			whowaeditor.insert();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Upps!! ha habido un error al insertar datos");
 		}
-			
 		
-}
+	}
+
 }
