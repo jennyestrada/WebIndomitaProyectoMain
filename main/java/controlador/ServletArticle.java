@@ -1,20 +1,35 @@
 package controlador;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import modelo.ArticleEditor;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 /**
  * Servlet implementation class ServletArticle
  */
+@MultipartConfig
 public class ServletArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private String pathFiles = "C:\\DAW\\Proyectos\\ProyectoWebIndomita\\src\\main\\webapp\\images";
+	// donde guardare los archivos
+	
+	private File uploads = new File (pathFiles);
+	// creo obejto uploads de tipo File y le doy como parametro pathFiles que es el que tiene la ruta guradada
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,9 +58,38 @@ public class ServletArticle extends HttpServlet {
 		String text = request.getParameter("text");
 		String image = request.getParameter("image");// hace falta el path
 		
-		System.out.println(title + text + image );
+		Part part = request.getPart("image");
+		// nos leer los datos binarios de la imagen insertada, 
 		
-		ArticleEditor articleeditor = new ArticleEditor (title,text,image);
+		Path path = Paths.get(part.getSubmittedFileName());
+		// nos da el nombre del archivo original
+		
+		String fileName = path.getFileName().toString();
+		// path tiene la ubicac de la imagen, conviertela en string y guardala en fileName
+		
+		// fileName es lo que usare en bbdd o el contrutor.
+		
+		
+		InputStream input = part.getInputStream();
+		//CREAMOS EL CAMINO PARA EL INTERCAMBIO DE DATOS, BUFFER
+		
+		File file = new File (uploads,fileName);
+		
+		// copiamos la lectura de la imagen que esta en input en file
+		
+		try {
+			Files.copy(input,file.toPath());
+		}catch (Exception e) {
+			System.out.println("Upps no se ha copiado la foto");
+			PrintWriter error = response.getWriter();
+			error.print("<h3>Upp error a subir la foto, contactar con el administrador</h3> ");
+			
+		}
+		
+	
+		System.out.println(title + text + fileName );
+		
+		ArticleEditor articleeditor = new ArticleEditor (title,text,fileName);
 		
 		try {
 			articleeditor.insert();
