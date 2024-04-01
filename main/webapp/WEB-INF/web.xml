@@ -49,4 +49,34 @@
     <servlet-name>ServletWhoWA</servlet-name>
     <url-pattern>/ServletWhoWA</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletList</display-name>
+    <servlet-name>ServletList</servlet-name>
+    <servlet-class>controlador.ServletList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletList</servlet-name>
+    <url-pattern>/ServletList</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletListImages</display-name>
+    <servlet-name>ServletListImages</servlet-name>
+    <servlet-class>controlador.ServletListImages</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletListImages</servlet-name>
+    <url-pattern>/ServletListImages</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletUserList</display-name>
+    <servlet-name>ServletUserList</servlet-name>
+    <servlet-class>controlador.ServletUserList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletUserList</servlet-name>
+    <url-pattern>/ServletUserList</url-pattern>
+  </servlet-mapping>
 </web-app>

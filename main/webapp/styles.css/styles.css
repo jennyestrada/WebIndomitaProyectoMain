@@ -121,6 +121,9 @@ a{
     padding: 5px;
 }
 
+.ta-center{
+	text-align: center;
+}
 
 .justify-center{
     justify-content: center;

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css/styles.css">
+
+	     <script>
+		 function llamada(){
+			// creo objeto xhr
+			let xhr = new XMLHttpRequest();
+			let resultados;
+			
+			xhr.onreadystatechange = function (){// ejecuta cada estado de la conexion, la final es la 4
+				//cuando llegues al 4 ejecuta ------------------------------
+				if (xhr.readyState ===4){
+					if (xhr.status === 200){// cuando todo va mal manda un 404, pero cuando todo va bien manda 200
+						// mediante el metodo xhr.responseText quiero que me lo pases a JSON y lo guardes en resultado
+						resultados = JSON.parse(xhr.responseText);
+					
+					}
+				}
+			};
+	
+			xhr.open("GET" ,"ServletListArticle",false);
+			xhr.setRequestHeader("Content-Type","application/json");
+			xhr.send();
+			pintar(resultados);
+				 	 
+		};
+		
+	
+	
+		 
+		 function pintar (resultados){
+			 console.log(resultados)
+			 
+			 let html = "<table border=1>";
+			 //for (let i=0; i<resultados.length;1++){
+				 //html += "<tr><td>" +resultados[i].title+ "</td></tr>" +resultados[i].title+ "</td></tr>" +resultados[i].text+ "</td></tr>" +resultados[i].image+"</td></tr>"
+			 //}
+					 
+		 	html += "</table>";
+					 
+		 	// y en innerHTML le digo = a html 
+			 
+			 // buscar el id que le di al listado ArticleList
+			 document.getElementById("listado").innerHTML = html;
+		 
+		 }
+		 
+		 
+		 
+		 // cuando windos se cargue ejecute la function 
+		 window.onload = function(){
+			 llamada();
+		 }
+		 
+		 
+	 </script>
+
+</head>
+<body>
+    <nav>
+        <div class="header-logo" >
+         <img class="responsive-image" src="/imagenes/logo indomita.png" alt="logo indomita">
+         </div>
+         <div>
+             <ul class="nav-links"> 
+                 <li ><a href="#"><p>Cerrar sesión</p></a></li>
+              </ul>        
+         </div>       
+     </nav>
+       
+
+	<div class="container">
+		<h1 class="main-title">LISTA DE ARTICULOS</h1>
+	         
+	    <div id="listado">
+			
+		</div>
+		<div id="#" class="menu-box__links main-paragraph--blue">
+			<a href="#"><p>Articulo 1</p></a>
+			<div class="row justify-center">
+				<div class="flex-column flex-column--50 ta-center" >
+		         	<form action="#" method="post" enctype="multipart/form-data">
+			 	
+		         		<button class="primary-button mt-15 width-100 d-block"   type="submit">Eliminar articulo</button>
+		    		
+					</form>
+		    	</div>   
+		    	<div class="flex-column flex-column--50 ta-center" >
+		         	<form action="#" method="post" enctype="multipart/form-data">
+			 	
+		         		<button class="primary-button mt-15 width-100 d-block"   type="submit">Editar articulo</button>
+		    		
+					</form>
+		    	</div>   
+			  
+		    </div> 
+		</div>
+	</div>
+                       
+							   
+ 
+    <div class="footer-container">
+        <h3>INDOMITA CREATIVA</h3>
+            <p>Contacto:</p>
+            <p>indomita@indomita.es</p>
+                <div class="footer-container__row">
+                    <p>
+                        <a href="#">Política de privacidad</a>
+                    </p>
+                    <p>
+                        <a href="#">Política de cookies</a>
+                    </p> 
+                    <p>
+                        <a href="#">Aviso legaL</a>
+                    </p>        
+                </div>
+
+
+        </div>   
+</body>
+</html>

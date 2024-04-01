@@ -2,7 +2,11 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
 
 import modelo.Access;
 
@@ -36,5 +40,30 @@ public class AccessDao {
 		// NO HACE FALTA CERRAR CONEXION PORQUE DBConexion ES UN OBJETO, CUANDO 
 		// DEJE DE FUNCIONAR EL RECOGERDOR JAVA SE LO CARGA.
 	}
+	
+	
+	private ArrayList<Access> userList() throws SQLException{
+		
+		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM access");
+		ResultSet rs = preparedStatement.executeQuery();
+		
+		ArrayList<Access> result = new ArrayList<Access>();
+		
+		while(rs.next()) {
+			result.add(new Access(rs.getInt("ID"),rs.getString("FULLNAME"),rs.getString("PASSWORD"),rs.getString("EMAIL")));
+			
+		}
+		
+		return result;
+	}
+	
+	// necesitamos convertir la info a un formato JSON  creamo el metodo.
+		public String convertJson() throws SQLException {
+			String convertJson= " ";
+			Gson gson= new Gson();
+			convertJson = gson.toJson(this.userList());
+			System.out.println(convertJson);
+			return convertJson;
+		}
 
 }
