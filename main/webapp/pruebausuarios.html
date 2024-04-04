@@ -1,26 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+       <meta charset="UTF-8">
+    <title>Naves</title>
+    <link rel="stylesheet" href="css/limpiarGenericos.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <script src="https://kit.fontawesome.com/887ee4ad6e.js" crossorigin="anonymous"></script>
+    <script src="js/slider.js" type="text/javascript"></script>
+    <style>
+
+        #botonCambiaFoto{
+            padding: 10px;
+            background: #1f4b81;
+            color: aliceblue;
+            cursor: pointer ;
+        }
+
+    </style>
+    <script type="text/javascript">
+		
+		
+		
+
+    window.onload = function() {
+		
+		// XMLHttpRequest Es un obejto de JAVASCRITO, con este obejto lo que hace 
+		// le usuario se hace en segundo plano, es decir no lo saca de la panatalla
+		// si genera un evento.
+		//------------------------------------------------------------------------------
+    	
+    	// let usuario; 
+    	
+    	console.log("entro")
+    	// 1 - creo el objeto xhr
+	      let xhr = new XMLHttpRequest();
+	      let results;
+	      
+	     // 2 - onreadystatechange este metodo revisa los estados de la conexion la final es la 4, la que le interesa
+	     // si manda un 200 quiere decir que todo va bien solo que no lo vemos como el 404.
+	   			 xhr.onreadystatechange = function () {
+                   if (xhr.readyState === 4){
+                       if (xhr.status === 200) {
+                         try{
+		// 3 - mediante la clase javascript JSON me parsee el texto que me envia el Servlet	
+		// y los metera en la variable results		 
+                    	 results = JSON.parse(xhr.responseText);            
+              
+                    	// document.getElementById('usuario').innerHTML = usuario.nombre + " <a href='CerrarSesion'>CerrarSesión</a>";
+                         }catch (e) {
+							// TODO: handle exception
+							//location.href = "login.html";
+						}
+                       }                    
+                   }
+               };
+               
+       // 4 - ponemos GET porque para traer los datos usamos el metodo GET
+       // tambien ponemos el nombre del Servlet
+		
+               xhr.open("GET", "ServletUserList", false);
+               xhr.setRequestHeader("Content-Type", "application/json");// esto es opcional
+               xhr.send();
+               console.log(results)
+        // 5 - le doy como parametro results, aqui estaria los datos metidos     
+               paint(results);
+    }
+    
+    
+    function paint (results){
+		
+		// 7 - creo una variable html
+		let html = "<table border =1>";
+			for (let i=0;i<results.length; i++){
+
+				html += "<tr><td>"+results[i].fullname+"<tr><td>"+results[i].password+"<tr><td>"+results[i].email+"<tr><td>"
+			}
+			html += "</table>";
+		// 8 - este html es el que le damos al INNERHTML del punto 6
+		
+		
+		//  6 - le digo que localice mi fomulario por el id que le di
+		document.getElementById("userlist").innerHTML=html;
+	}
+    </script>
 
 </head>
+
+
+
+
 <body>
-	<h1>lista de usuarios</h1>
-	<a href="ServletUserList">Ejecuta lista</a>
-	
-	function llamada(url){
+	<div id="userlist">
 		
-	}
 		
+	</div>
 	
+	
+	
+	
+	<!--  <nav>
+        <div class="header-logo" >
+         <img class="responsive-image" src="/imagenes/logo indomita.png" alt="logo indomita">
+         </div>
+         <div>
+             <ul class="nav-links"> 
+               	<li ><a href="#"><p>Inicio</p></a></li>
+                <li ><a href="#"><p>Quienes somos</p></a></li>
+                <li ><a href="#"><p>Acceso</p></a></li>
+                <li ><a href="Registerform.html"><p>Registro</p></a></li>
+                
+ 
+              </ul>
+         
+         </div>
+        
+     </nav>
+
+        <div class="container">
+            <h1 class="main-title">REGISTRARSE EN NUESTRA REVISTA DIGITAL</h1>
+            
+            <div class="content-box">
+                
+                        
+                        <form action="ServletUserList" method="post" width-100 d-block">
+                            <div class="row">
+
+                                <div class="flex-column--15">
+                                    <label for="name">Nombre completo</label> 
+                                </div>  
+
+                                <div class="flex-column--85 comment-box main-paragraph">
+                                     <input   class="width-50 border-field  mt-15" type="text" name="name" placeholder="Nombre completo...">
+                                </div>
+
+                                <div class="flex-column--15">
+                                    <label for="email">Email</label> 
+                                </div>  
+
+                                <div class="flex-column--85  comment-box main-paragraph">
+                                    <input class="width-50 mt-15 border-field"    type="email" name="email" placeholder="Escribe un email...">
+                                </div>
+
+                                <div class="flex-column--15">
+                                    <label for="email">password</label> 
+                                </div>
+
+                                <div class="flex-column--85  comment-box main-paragraph">
+                                    <input  class="width-50 mt-15 border-field" type="password" name="password" placeholder="Ingresa una contraseña...">
+                                </div>
+                                
+                                
+                                <button class="primary-button mt-15"   type="submit">Registrarme</button>
+                            </div>      
+                        </form>
+
+
+
+                    </div>
+
+            </div>       
+                
+                        
+        </div>
+
+    </div>
+</div>
+
+
+-->
 
 
 
 
 
 
-  
+
+    <div class="footer-container">
+        <h3>INDOMITA CREATIVA</h3>
+            <p>Contacto:</p>
+            <p>indomita@indomita.es</p>
+                <div class="footer-container__row">
+                    <p>
+                        <a href="#">Política de privacidad</a>
+                    </p>
+                    <p>
+                        <a href="#">Política de cookies</a>
+                    </p> 
+                    <p>
+                        <a href="#">Aviso legaL</a>
+                    </p>        
+                </div>
+
+
+        </div>   
 </body>
 </html>

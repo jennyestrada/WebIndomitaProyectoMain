@@ -79,4 +79,14 @@
     <servlet-name>ServletUserList</servlet-name>
     <url-pattern>/ServletUserList</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletArticleList</display-name>
+    <servlet-name>ServletArticleList</servlet-name>
+    <servlet-class>controlador.ServletArticleList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletArticleList</servlet-name>
+    <url-pattern>/ServletArticleList</url-pattern>
+  </servlet-mapping>
 </web-app>

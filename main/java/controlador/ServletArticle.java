@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import modelo.ArticleEditor;
+import modelo.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,10 +26,7 @@ import java.sql.SQLException;
 public class ServletArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private String pathFiles = "C:\\DAW\\Proyectos\\ProyectoWebIndomita\\src\\main\\webapp\\images";
-	// donde guardare los archivos
 	
-	private File uploads = new File (pathFiles);
 	// creo obejto uploads de tipo File y le doy como parametro pathFiles que es el que tiene la ruta guradada
        
     /**
@@ -56,16 +54,17 @@ public class ServletArticle extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String text = request.getParameter("text");
-		String image = request.getParameter("image");// hace falta el path
+		//String image = request.getParameter("image");// hace falta el path
 		
 		Part part = request.getPart("image");
+		
 		// nos leer los datos binarios de la imagen insertada, 
 		
-		Path path = Paths.get(part.getSubmittedFileName());
+		/*Path path = Paths.get(part.getSubmittedFileName());
 		// nos da el nombre del archivo original
 		
 		String fileName = path.getFileName().toString();
-		// path tiene la ubicac de la imagen, conviertela en string y guardala en fileName
+		// path tiene la ubicac de la imagen, la convierte en string y guarda en fileName
 		
 		// fileName es lo que usare en bbdd o el contrutor.
 		
@@ -85,7 +84,11 @@ public class ServletArticle extends HttpServlet {
 			error.print("<h3>Upp error a subir la foto, contactar con el administrador</h3> ");
 			
 		}
+		*/
 		
+		
+		// en esta variable fileName guardamos el los datos que nos creo el metodo getImage
+	    String fileName = Utils.getImage(part);
 	
 		System.out.println(title + text + fileName );
 		

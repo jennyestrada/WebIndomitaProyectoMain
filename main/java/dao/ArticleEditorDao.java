@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
+
 import com.google.gson.Gson;
 
 import dao.DBConexion;
@@ -77,14 +79,16 @@ public class ArticleEditorDao {
 	}
 	
 	//creamos metodo para listar con JSON, para ello necesito la libreria
-	public String articleListJson() {
-		//genero un objeto gson de tipo Gson, 
+	public String articleListJson() throws SQLException {
 		
+		
+		//genero un objeto gson de tipo Gson, 
 		Gson gson = new Gson ();
 		
-		// llamo al metodo que crea la array articleListJson que tiene los datos de
+		// llamo al metodo que crea el array articleListJson que tiene los datos de
 		// traidos de la bbdd y le digo gson.toJson lo convierta formato json
-		String txtJSON = gson.toJson(this.articleListJson());
+		String txtJSON = gson.toJson(this.ArticleList());
+		System.out.println(txtJSON);
 		
 
 		return txtJSON;

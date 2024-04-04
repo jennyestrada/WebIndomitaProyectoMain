@@ -10,6 +10,125 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="styles.css/styles.css">
 
+
+	 <script type="text/javascript">
+		
+		
+	// usare el mismo servlet y dao que uso para listar articulos	
+
+    window.onload = function() {
+		
+		// XMLHttpRequest Es un obejto de JAVASCRITO, con este obejto lo que hace 
+		// le usuario se hace en segundo plano, es decir no lo saca de la panatalla
+		// si genera un evento.
+		//------------------------------------------------------------------------------
+    	
+    	// let usuario; 
+    	
+    	console.log("entro")
+    	// 1 - creo el objeto xhr
+	      let xhr = new XMLHttpRequest();
+	      let results;
+	      
+	     // 2 - onreadystatechange este metodo revisa los estados de la conexion la final es la 4, la que le interesa
+	     // si manda un 200 quiere decir que todo va bien solo que no lo vemos como el 404.
+	   			 xhr.onreadystatechange = function () {
+                   if (xhr.readyState === 4){
+                       if (xhr.status === 200) {
+                         try{
+		// 3 - mediante la clase javascript JSON me parsee el texto que me envia el Servlet	
+		// y los metera en la variable results		 
+                    	 results = JSON.parse(xhr.responseText);            
+              
+                    	//document.getElementById('usuario').innerHTML = usuario.nombre + " <a href='CerrarSesion'>CerrarSesión</a>";
+                         }catch (e) {
+							// TODO: handle exception
+							//location.href = "login.html";
+						}
+                       }                    
+                   }
+               };
+               
+       // 4 - ponemos GET porque para traer los datos usamos el metodo GET
+       // tambien ponemos el nombre del Servlet
+		
+               xhr.open("GET", "ServletArticleList", false);
+               xhr.setRequestHeader("Content-Type", "application/json");// esto es opcional
+               xhr.send();
+               console.log(results)
+        // 5 - le doy como parametro results, aqui estaria los datos metidos     
+               paint(results);
+    }
+    
+    
+    function paint (results){
+		
+		let html = "";
+		
+		     html +=  '<div class="row" >'
+
+       html +=   '<div class="flex-column flex-column--65 relative-position image-article-box  background-image" style="background-image:url(\''+ results[0].image+ '\');">'
+       html +=   '</div>'
+
+      html +=   '<div class="flex-column--50  article-box__topdescrip  main-paragraph--white mt-15" >'
+       html +=   '<p >Premium</p>'
+      html +=   '<h3 class="paragraph-top">' + results[0].title + '</h3>'
+       html +=  '<p>' + results[0].text + '</p>'
+       html +=   '<div class="article-box__small">'
+       html +=    '<p>Leer artículo</p>'   
+                
+        html +=    '</div>'
+    
+       html +=    '</div>'
+
+ html +=     '</div>'
+ 
+			for (let i=1;i<results.length; i++){
+				
+			// 6 pego el htlm 
+				
+  
+ 
+  html +=    '<div class="row">'
+        
+        
+        
+        
+        
+        
+        
+  html +=   '<div class="flex-column flex-column flex-column--50  relative-position mt-15">'          
+       html +=  '<div class="article-box__img">'
+        html +=     '<div class="article-box__description main-paragraph main-paragraph--white mt-15">'
+            html +=   '<p >Premium</p>'
+                  html +=    '<h3>'+ results[i].title + '</h3>'
+           html +=  '<div class="article-box__text">'
+                    
+                  html +=  '<p>' + results[i].text + '</p>'
+                   html +=        '<div class="article-box__small">'
+                       html +=      '<p>Leer artículo</p>'   
+                                
+                        html +=      '</div>'
+
+                      html +=     '</div>'
+             html += '</div>'
+    html +=    '</div>'           
+    html +=   '</div>' 
+ 
+        
+ html +=   '</div>'  
+			
+				}
+			document.getElementById("ArticleList").innerHTML=html;
+		}
+		
+    </script>
+    
+
+
+
+
+
 </head>
 <body>
     <nav>
@@ -31,114 +150,13 @@
     </nav>
 
     <div class="container">
-        <h1 class="main-title">BIENVENIDO A INDOMITA</h1>
-        <div class="row">
-
-            <div class="flex-column flex-column--65 relative-position image-article-box  background-image" style="background-image:url('/imagenes/40.jpg');">
-            </div>
-
-             <div class="flex-column--50  article-box__topdescrip  main-paragraph--white mt-15"  >
-                <p >Premium</p>
-                <h3 class="paragraph-top">Título artículos destacados</h3>
-                <p>Breve descripcion It was popularised in the 1960s with the release of Letraset sheets containing..</p>
-                <div class="article-box__small">
-                    <p>Leer artículo</p>   
-                
-                </div>
-    
-            </div>
-
-        </div>
-
-        <div class="row">
-        
-            <div class="flex-column flex-column flex-column--50  relative-position mt-15">          
-                <div class="article-box__img">
-                    <div class="article-box__description main-paragraph main-paragraph--white mt-15">
-                            <p >Premium</p>
-                            <h3>Título artículo 1</h3>
-                            <div class="article-box__text">
-                    
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                Phasellus eleifend sodales dolor, feugiat tincidunt turpis 
-                                eleifend ut.</p>
-                                <div class="article-box__small">
-                                    <p>Leer artículo</p>   
-                                
-                                </div>
-
-                            </div>
-                    </div>
-                </div>           
-            </div> 
-
-            <div class="flex-column flex-column flex-column--50  relative-position mt-15">          
-                <div class="article-box__img">
-                    <div class="article-box__description  main-paragraph main-paragraph--white mt-15">
-                            <p >Premium</p>
-                            <h3>Título artículo 1</h3>
-                            <div class="article-box__text">
-                    
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                Phasellus eleifend sodales dolor, feugiat tincidunt turpis 
-                                eleifend ut.</p>
-                                <div class="article-box__small">
-                                    <p>Leer artículo</p>   
-                                
-                                </div>
-
-                            </div>
-                    </div>
-                </div>           
-            </div> 
-
-
-            <div class="flex-column flex-column--50  relative-position mt-15">          
-                <div class="article-box__img">
-                    <div class="article-box__description main-paragraph main-paragraph--white mt-15">
-                            <p >Premium</p>
-                            <h3>Título artículo 1</h3>
-                            <div class="article-box__text">
-                    
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                Phasellus eleifend sodales dolor, feugiat tincidunt turpis 
-                                eleifend ut.</p>
-                                <div class="article-box__small">
-                                    <p>Leer artículo</p>   
-                                
-                                </div>
-
-                            </div>
-                    </div>
-                </div>           
-            </div> 
-
-            <div class="flex-column flex-column flex-column--50  relative-position mt-15">          
-                <div class="article-box__img">
-                    <div class="article-box__description  main-paragraph main-paragraph--white mt-15">
-                            <p >Premium</p>
-                            <h3>Título artículo 1</h3>
-                            <div class="article-box__text">
-                    
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                Phasellus eleifend sodales dolor, feugiat tincidunt turpis 
-                                eleifend ut.</p>
-                                <div class="article-box__small">
-                                    <p>Leer artículo</p>   
-                                
-                                </div>
-
-                            </div>
-                    </div>
-                </div>           
-            </div> 
-
-
-        
-        </div>  
-
-
-           
+ 		<h1 class="main-title">BIENVENIDO A INDOMITA</h1>
+ 		
+    <div id="ArticleList">
+		
+    </div>	
+ 		
+ 		
         
  
 

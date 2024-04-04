@@ -48,21 +48,14 @@ public class ServletUserList extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		// una vez lo vemos en formato json llamamos al objeto PrinWriter para 
-		//que se vea en la pantalla del usuario.
-		// con el obejeto response llamamo a su metodo getWiter
+		// una vez lo tenemos en formato json llamamos al objeto PrinWriter para 
+		// que se vea en la pantalla del usuario.
+		// con el objeto response llamamo a su metodo getWiter
 		
 		PrintWriter printWriterResponse = response.getWriter();
 		printWriterResponse.print(responseJson);
 		
-		
-		
-		
-		
-		
-		
-		
-		
+		}
 		
 		// esto solo impirme los dato en consola, necesitamos convertir esta info a formato JSON 
 		
@@ -81,7 +74,7 @@ public class ServletUserList extends HttpServlet {
 		
 		
 		
-	}
+	
 	
 	
 
