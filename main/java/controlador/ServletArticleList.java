@@ -62,6 +62,7 @@ public class ServletArticleList extends HttpServlet {
 		
 		
 		
+		
 		//String responseJson="";
 		
 		
