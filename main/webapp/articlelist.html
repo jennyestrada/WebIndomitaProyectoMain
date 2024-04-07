@@ -79,7 +79,8 @@
 		   html +=  '<div class="flex-column flex-column--50 ta-center" >'
 		     html +=   '<form action="#" method="post" enctype="multipart/form-data">'
 			 	
-		        html += '<button class="primary-button mt-15 width-100 d-block"   type="submit">Editar articulo</button>'
+		      
+				html += '<a href="ServletArticleList?id=' + results[i].id + '&op=2"><button class="primary-button mt-15 width-100 d-block" type="submit">Editar artículo</button></a>';
 		    		
 				html += '</form>'
 		    html += '</div>' 

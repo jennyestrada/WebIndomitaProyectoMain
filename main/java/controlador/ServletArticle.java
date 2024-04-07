@@ -57,7 +57,6 @@ public class ServletArticle extends HttpServlet {
 		//String image = request.getParameter("image");// hace falta el path
 		
 		Part part = request.getPart("image");
-		
 		// nos leer los datos binarios de la imagen insertada, 
 		
 		/*Path path = Paths.get(part.getSubmittedFileName());
@@ -86,13 +85,14 @@ public class ServletArticle extends HttpServlet {
 		}
 		*/
 		
-		
 		// en esta variable fileName guardamos el los datos que nos creo el metodo getImage
 	    String fileName = Utils.getImage(part);
+	    
+	    String excerpt = request.getParameter("excerpt");
 	
-		System.out.println(title + text + fileName );
+		System.out.println(title + text + fileName + excerpt );
 		
-		ArticleEditor articleeditor = new ArticleEditor (title,text,fileName);
+		ArticleEditor articleeditor = new ArticleEditor (title,text,fileName,excerpt);
 		
 		try {
 			articleeditor.insert();

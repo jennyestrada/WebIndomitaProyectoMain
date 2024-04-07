@@ -9,6 +9,8 @@ public class ArticleEditor {
 	private String title;
 	private String text;
 	private String image;
+	private String excerpt;
+	
 	
 	
 	
@@ -22,22 +24,24 @@ public class ArticleEditor {
 
 
 	// Sin id
-	public ArticleEditor(String title, String text, String image) {
+	public ArticleEditor(String title, String text, String image,String excerpt) {
 		super();
 		this.title = title;
 		this.text = text;
 		this.image = image;
+		this.excerpt = excerpt;
 	}
 	
 	
 	// Con id
 	
-	public ArticleEditor(int id, String title, String text, String image) {
+	public ArticleEditor(int id, String title, String text, String image,String excerpt) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.text = text;
 		this.image = image;
+		this.excerpt = excerpt;
 	}
 	
 	
@@ -95,6 +99,21 @@ public class ArticleEditor {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	
+
+
+	public String getExcerpt() {
+		return excerpt;
+	}
+
+
+
+
+	public void setExcerpt(String excerpt) {
+		this.excerpt = excerpt;
+	}
+
 
 
 
@@ -102,15 +121,19 @@ public class ArticleEditor {
 		ArticleEditorDao articleEditordao = new ArticleEditorDao();
 		articleEditordao.insert(this);
 	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "ArticleEditor [title=" + title + ", text=" + text + ", image=" + image + ", excerpt=" + excerpt + "]";
+	}
 	
 	
 	
 	
 
-	@Override
-	public String toString() {
-		return "ArticleEditor [title=" + title + ", text=" + text + ", image=" + image + "]";
-	}
 	
 	
 	

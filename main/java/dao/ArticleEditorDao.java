@@ -27,14 +27,16 @@ public class ArticleEditorDao {
 	// METODO PARA INSERTAR
 	
 	public void insert (ArticleEditor articleeditor ) throws SQLException {
-		String sql = "INSERT INTO article (TITLE,TEXT,IMAGE)"
-				+ " VALUES (?,?,?)";// interregantes por cada valor nombre clase matricula...falta la foto
+		String sql = "INSERT INTO article (TITLE,TEXT,IMAGE,EXCERPT)"
+				+ " VALUES (?,?,?,?)";// interregantes por cada valor nombre clase matricula...falta la foto
 		
 		PreparedStatement preparedstatement = con.prepareStatement(sql);
 		
 		 preparedstatement.setString(1,articleeditor.getTitle());
 		 preparedstatement.setString(2,articleeditor.getText());
 		 preparedstatement.setString(3,articleeditor.getImage());
+		 preparedstatement.setString(4,articleeditor.getExcerpt());
+		
 		 
 		 int rows = preparedstatement.executeUpdate();
 		 preparedstatement.close();
@@ -50,7 +52,9 @@ public class ArticleEditorDao {
 	// creo un metodo con un arraylist de tipo ArticleEditor que llamo ArticleList
 	public ArrayList<ArticleEditor> ArticleList() throws SQLException{
 		
-		String slq = "SELECT * FROM article";
+		// quiero que me salgas los ultimos articulos metidos, es 
+		// decir los mas nuevos tendra un id mas alto.
+		String slq = "SELECT * FROM article ORDER BY id DESC";
 		
 		// le envio la selentencia sql que acabo de hacer al PreparedStatement
 		PreparedStatement preparedstatement = con.prepareStatement(slq);
@@ -71,7 +75,7 @@ public class ArticleEditorDao {
 			// toda la fila que me devuelve 
 			// el orden de id title tex .... es el mismo que el la BBDD
 			
-			articleList.add(new ArticleEditor(result.getInt("id"),result.getString("title"),result.getString("text"),result.getString("image")));
+			articleList.add(new ArticleEditor(result.getInt("id"),result.getString("title"),result.getString("text"),result.getString("image"),result.getString("excerpt")));
 						
 				
 		}	

@@ -37,21 +37,43 @@ public class ServletArticleList extends HttpServlet {
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		String responseJson="";
 		
-		try {
-			responseJson = new ArticleEditorDao().articleListJson();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		/*
+		 * @Metodo para recuperar el parametro que le indico
+		 */
+		int id = Integer.parseInt(request.getParameter("id"));
+		int option = Integer.parseInt(request.getParameter("op"));
+		
+		if (option == 2) {
+			
+		}else {
+			String responseJson="";
+			try {
+				responseJson = new ArticleEditorDao().articleListJson();
+				PrintWriter printWriterResponse = response.getWriter();
+				printWriterResponse.print(responseJson);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
+		
+		
+		
+		//String responseJson="";
+		
+		
+		//responseJson = new ArticleEditorDao().articleListJson();
+		
 		
 		// una vez lo tenemos en formato json llamamos al objeto PrinWriter para 
 		// que se vea en la pantalla del usuario.
 		// con el objeto response llamamo a su metodo getWiter
 		
-		PrintWriter printWriterResponse = response.getWriter();
-		printWriterResponse.print(responseJson);
+		//PrintWriter printWriterResponse = response.getWriter();
+		//printWriterResponse.print(responseJson);
 		
 		}
 		
