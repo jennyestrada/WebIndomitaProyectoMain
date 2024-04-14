@@ -18,24 +18,55 @@ public class ArticleEditorDao {
 	
 	public static Connection con = null;
 	
-	// constructor
+	/*
+	 * @Metodo para conectarnos a BDconexion.
+	 */
 	
 	public ArticleEditorDao () throws SQLException {
 		this.con = DBConexion.getConexion();
 	}
 	
-	// METODO PARA INSERTAR
+
+	/*
+	 * @Metodo insertar datos de articulo en la BBDD 
+	 */
 	
-	public void insert (ArticleEditor articleeditor ) throws SQLException {
+	
+	public void insert (ArticleEditor articleEditor ) throws SQLException {
 		String sql = "INSERT INTO article (TITLE,TEXT,IMAGE,EXCERPT)"
 				+ " VALUES (?,?,?,?)";// interregantes por cada valor nombre clase matricula...falta la foto
 		
 		PreparedStatement preparedstatement = con.prepareStatement(sql);
 		
-		 preparedstatement.setString(1,articleeditor.getTitle());
-		 preparedstatement.setString(2,articleeditor.getText());
-		 preparedstatement.setString(3,articleeditor.getImage());
-		 preparedstatement.setString(4,articleeditor.getExcerpt());
+		 preparedstatement.setString(1,articleEditor.getTitle());
+		 preparedstatement.setString(2,articleEditor.getText());
+		 preparedstatement.setString(3,articleEditor.getImage());
+		 preparedstatement.setString(4,articleEditor.getExcerpt());
+		
+		 
+		 int rows = preparedstatement.executeUpdate();
+		 preparedstatement.close();
+		
+	}
+	
+	/*
+	 * @Metodo para actualizar la informacion del articulo, el objeto 
+	 * articleEditor llama al get Id de la clase y le pasa el parametro 
+	 * que se saca de la URL.
+	 */
+	
+	public void update (ArticleEditor articleEditor ) throws SQLException {
+		String sql = "UPDATE article SET TITLE= ?, TEXT= ?, IMAGE= ?,EXCERPT= ?"
+				+ " WHERE id = "+ articleEditor.getId();
+		
+		
+			
+		PreparedStatement preparedstatement = con.prepareStatement(sql);
+		
+		 preparedstatement.setString(1,articleEditor.getTitle());
+		 preparedstatement.setString(2,articleEditor.getText());
+		 preparedstatement.setString(3,articleEditor.getImage());
+		 preparedstatement.setString(4,articleEditor.getExcerpt());
 		
 		 
 		 int rows = preparedstatement.executeUpdate();
@@ -44,12 +75,58 @@ public class ArticleEditorDao {
 	}
 	
 	
+	/*
+	 * @Metodo para borrar un articulo, cerramos el PreparedStatement 
+	 * para liberar recursos y evitar posibles pérdidas de memoria 
+	 * o conexiones no cerradas.
+	 */
+	
+	public void delete (int articleId) throws SQLException {
+		String sql = "UPDATE article SET deleted = 1 WHERE id = "+ articleId;
+		;
+			
+		PreparedStatement preparedstatement = con.prepareStatement(sql);
+		
+		 int rows = preparedstatement.executeUpdate();
+		 preparedstatement.close();
+		
+	}
 	
 	
-	// METODO PARA LISTAR MEDIANTE ARRAYLIST
 	
 	
-	// creo un metodo con un arraylist de tipo ArticleEditor que llamo ArticleList
+	
+	
+	/*
+	 * @Metodo para obtener datos de articulos al que corresponda el id. 
+	 */
+	public ArticleEditor articleById(int id) throws SQLException {
+		
+		String sql = "SELECT * FROM article WHERE id = ?";
+		
+		PreparedStatement preparedstatement = con.prepareStatement(sql);
+		preparedstatement.setInt(1, id);
+		ResultSet result = preparedstatement.executeQuery();
+		result.next();
+		
+		ArticleEditor article = new ArticleEditor(result.getInt("id"),result.getString("title"),result.getString("text"),result.getString("image"),result.getString("excerpt"));
+		
+		return article;
+		
+		
+		
+	}
+
+	
+	
+	
+	
+	/*
+	 * @Metodo para obtener datos y meterlos en el arrylista de tipo ArticleEditor
+	 * mediante un select ordenando los datos en orden descendiente.
+	 */
+	
+	
 	public ArrayList<ArticleEditor> ArticleList() throws SQLException{
 		
 		// quiero que me salgas los ultimos articulos metidos, es 
@@ -82,22 +159,6 @@ public class ArticleEditorDao {
 		return 	articleList;
 	}
 	
-	//creamos metodo para listar con JSON, para ello necesito la libreria
-	public String articleListJson() throws SQLException {
-		
-		
-		//genero un objeto gson de tipo Gson, 
-		Gson gson = new Gson ();
-		
-		// llamo al metodo que crea el array articleListJson que tiene los datos de
-		// traidos de la bbdd y le digo gson.toJson lo convierta formato json
-		String txtJSON = gson.toJson(this.ArticleList());
-		System.out.println(txtJSON);
-		
+	
 
-		return txtJSON;
-		
-				
-		
-	}
 }

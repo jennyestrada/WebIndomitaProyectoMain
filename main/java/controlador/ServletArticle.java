@@ -18,6 +18,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import dao.ArticleEditorDao;
 
 /**
  * Servlet implementation class ServletArticle
@@ -41,66 +44,96 @@ public class ServletArticle extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		/*
+		 * @Metodo para pedir los datos de articulo,
+		 * que ha traido el dao de la bbdd y convertirlos a Json
+		 * en mi caso cree un metodo convertToJson en la clase Utils
+		 */
+		
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			
+			try {
+				ArticleEditor article = new ArticleEditorDao().articleById(id);
+				String responseJson = new Utils().convertToJson(article);
+				PrintWriter printWriterResponse = response.getWriter();
+				printWriterResponse.print(responseJson);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
+		
+		
 	}
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// request solo lo lee como string 
 		
-		String title = request.getParameter("title");
-		String text = request.getParameter("text");
-		//String image = request.getParameter("image");// hace falta el path
+		int op = Integer.parseInt(request.getParameter("op"));
 		
-		Part part = request.getPart("image");
-		// nos leer los datos binarios de la imagen insertada, 
-		
-		/*Path path = Paths.get(part.getSubmittedFileName());
-		// nos da el nombre del archivo original
-		
-		String fileName = path.getFileName().toString();
-		// path tiene la ubicac de la imagen, la convierte en string y guarda en fileName
-		
-		// fileName es lo que usare en bbdd o el contrutor.
-		
-		
-		InputStream input = part.getInputStream();
-		//CREAMOS EL CAMINO PARA EL INTERCAMBIO DE DATOS, BUFFER
-		
-		File file = new File (uploads,fileName);
-		
-		// copiamos la lectura de la imagen que esta en input en file
-		
-		try {
-			Files.copy(input,file.toPath());
-		}catch (Exception e) {
-			System.out.println("Upps no se ha copiado la foto");
-			PrintWriter error = response.getWriter();
-			error.print("<h3>Upp error a subir la foto, contactar con el administrador</h3> ");
+		if (op == 1 || op == 2) {
+			
+			// request solo lo lee como string por ello
+			// las imagenes las pasamos a string, en mi caso este
+			// conversion la hace un metodo de la clase Utils
+			String title = request.getParameter("title");
+			String text = request.getParameter("text");
+			Part part = request.getPart("image");
+			//Path path = Paths.get(part.getSubmittedFileName());
+			String fileName = Utils.getImage(part);
+			String excerpt = request.getParameter("excerpt");
+			System.out.println(title + text + fileName + excerpt );
+
+		  
+		    
+			if (op == 1) {
+				
+				ArticleEditor articleEditor = new ArticleEditor (title,text,fileName,excerpt);
+				try {
+					articleEditor.insert();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else if(op == 2) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				ArticleEditor articleEditor = new ArticleEditor(id,title,text,fileName,excerpt);
+				try {
+					articleEditor.update();
+				} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+				
+			}
+			
+		}else if (op == 3) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			ArticleEditor articleEditor = new ArticleEditor(id);
+			articleEditor.delete();
 			
 		}
-		*/
 		
-		// en esta variable fileName guardamos el los datos que nos creo el metodo getImage
-	    String fileName = Utils.getImage(part);
-	    
-	    String excerpt = request.getParameter("excerpt");
-	
-		System.out.println(title + text + fileName + excerpt );
 		
-		ArticleEditor articleeditor = new ArticleEditor (title,text,fileName,excerpt);
 		
-		try {
-			articleeditor.insert();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Upps!! ha habido un error al insertar datos");
-		}
+		/*
+		 * @param creo variable op y guardo el parametro extraido de la URL
+		 * en javaScript, es necesario parsearlo
+		 */
+		
+		
+		
+		
+		
 			
 		
 }

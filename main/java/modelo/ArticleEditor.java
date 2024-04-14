@@ -2,6 +2,8 @@ package modelo;
 
 import java.sql.SQLException;
 
+import com.google.gson.Gson;
+
 import dao.ArticleEditorDao;
 
 public class ArticleEditor {
@@ -115,13 +117,35 @@ public class ArticleEditor {
 	}
 
 
-
-
+	/*
+	 * @Metodo para insertar informacion en el formulario articulo
+	 */
 	public void insert() throws SQLException {
 		ArticleEditorDao articleEditordao = new ArticleEditorDao();
 		articleEditordao.insert(this);
 	}
+	
+	
 
+	/*
+	 * @Metodo para actualizar informacion de un articulo
+	 */
+	public void update() throws SQLException {
+		ArticleEditorDao articleEditordao = new ArticleEditorDao();
+		articleEditordao.update(this);
+	}
+	
+	/*
+	 * @Metodo para eliminar articulos entero usando su Pk "id"
+	 */
+	
+	public void delete() throws SQLException {
+		ArticleEditorDao articleEditordao = new ArticleEditorDao();
+		articleEditordao.delete(this.getId());
+	}
+	
+	
+	
 
 
 

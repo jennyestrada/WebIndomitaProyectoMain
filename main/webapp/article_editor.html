@@ -9,6 +9,80 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css/styles.css">
 
+	  <script type="text/javascript">
+		
+	
+		
+		
+    window.onload = function() {
+	// al cargar la ventana
+	// extraemos los parametros de Op y id de la URL 
+	// necearios para saber que opcion ejecutar y la Id del articulo a editar.	
+	let queryStrings = new URLSearchParams(window.location.search);
+	let parametersGet = Object.fromEntries(queryStrings.entries());
+	console.log(parametersGet);
+	
+		// XMLHttpRequest Es un obejto de JAVASCRITO, con este obejto lo que hace 
+		// le usuario se hace en segundo plano, es decir no lo saca de la panatalla
+		// si genera un evento.
+		//------------------------------------------------------------------------------
+    	
+    	 // identificamos si el op 1 o op 2, si es 2 entra en el if
+    	 document.getElementById("hiddenOp").value= parametersGet.op;
+    	 
+    	 
+    	if (parametersGet.op === '2') {
+			
+				console.log("entro")
+    	// 1 - creo el objeto xhr
+	      let xhr = new XMLHttpRequest();
+	      let results;
+	      
+	     // 2 - onreadystatechange este metodo revisa los estados de la conexion la final es la 4, la que le interesa
+	     // si manda un 200 quiere decir que todo va bien solo que no lo vemos como el 404.
+	   			 xhr.onreadystatechange = function () {
+                   if (xhr.readyState === 4){
+                       if (xhr.status === 200) {
+                         try{
+		// 3 - mediante la clase javascript JSON me parsee el texto que me envia el Servlet	
+		// y los metera en la variable results	
+ 
+                    	 results = JSON.parse(xhr.responseText);            
+                    	//document.getElementById('usuario').innerHTML = usuario.nombre + " <a href='CerrarSesion'>CerrarSesión</a>";
+                         }catch (e) {
+							// TODO: handle exception
+							//location.href = "login.html";
+						}
+                       }                    
+                   }
+               };
+               
+       // 4 - ponemos GET porque para traer los datos usamos el metodo GET
+       // tambien ponemos el nombre del Servlet
+		
+               xhr.open("GET", "ServletArticle?id=" + parametersGet.id, false);
+               xhr.setRequestHeader("Content-Type", "application/json");// esto es opcional
+               xhr.send();
+               
+        // 5 - le doy como parametro results, aqui estaria los datos metidos   
+        // y se mostraran en los cada input
+        // al  hiddenId se le asigna el id que se extrae en de la URL
+			    document.getElementById("title").value= results.title;
+			    document.getElementById("text").value= results.text;
+			    document.getElementById("excerpt").value= results.excerpt;
+			    document.getElementById("hiddenId").value= parametersGet.id;
+			
+    	} 
+    	
+    
+    	
+    	
+    
+    }
+   
+
+</script>
+
 </head>
 <body>
     <nav>
@@ -43,7 +117,7 @@
                                 <label for="comment">Titulo</label> 
                             </div>  
                             <div class="flex-column--85 comment-box main-paragraph">
-                                <textarea class="width-100  border-field" name="title" placeholder="Escribir articulo...."></textarea>
+                                <textarea id="title"  class="width-100  border-field" name="title" placeholder="Escribir articulo...."></textarea>
                             </div>                          
                         </div>      
 
@@ -55,7 +129,7 @@
                                     <label for="comment">Texto</label> 
                                 </div>  
                                 <div class="flex-column--85  comment-box main-paragraph ">
-                                    <textarea class="width-100  border-field" name="text" placeholder="Escribir texto...."></textarea>
+                                    <textarea id="text"  class="width-100  border-field" name="text" placeholder="Escribir texto...."></textarea>
                                 </div>                          
                             </div> 
                             
@@ -64,7 +138,7 @@
                                     <label for="comment">Resumen</label> 
                                 </div>  
                                 <div class="flex-column--85  comment-box main-paragraph ">
-                                    <textarea class="width-100  border-field" name="excerpt" placeholder="Escribir resumen...."></textarea>
+                                    <textarea  id="excerpt"   class="width-100  border-field" name="excerpt" placeholder="Escribir resumen...."></textarea>
                                 </div>                          
                             </div>                     
                         
@@ -76,10 +150,23 @@
                                     <label>Subir imagen</label>
                                    
                                  </div> 
+                                 
+                                       
+                           			
+                                
+                               	<input id="hiddenId" type="hidden" name="id" value="-1">
+                                <input id="hiddenOp" type="hidden" name="op" value="">                          
+                            	
+                                 
+                                 
                                  <div class="flex-column--85">
                                     <input type="file" name="image"> 
                                  </div> 
                                  <button class="primary-button mt-15"   type="submit">Publicar articulo</button>
+                                  
+                                  
+                                  
+                          
                                   
                                    
                         </form>

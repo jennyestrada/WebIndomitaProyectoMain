@@ -10,11 +10,18 @@
     <link rel="stylesheet" href="styles.css/styles.css">
 
 	 <script type="text/javascript">
+	
+	
+	
+		
+		window.onload = function() {
+		
+		
+	
 		
 		
 		
-
-    window.onload = function() {
+		
 		
 		// XMLHttpRequest Es un obejto de JAVASCRITO, con este obejto lo que hace 
 		// le usuario se hace en segundo plano, es decir no lo saca de la panatalla
@@ -35,7 +42,8 @@
                        if (xhr.status === 200) {
                          try{
 		// 3 - mediante la clase javascript JSON me parsee el texto que me envia el Servlet	
-		// y los metera en la variable results		 
+		// y los metera en la variable results		
+
                     	 results = JSON.parse(xhr.responseText);            
               
                     	//document.getElementById('usuario').innerHTML = usuario.nombre + " <a href='CerrarSesion'>CerrarSesión</a>";
@@ -65,24 +73,43 @@
 		let html = "";
 			for (let i=0;i<results.length; i++){
 				
-						html += '<div id="#" class="menu-box__links main-paragraph--blue">'
+			html += '<div id="#" class="menu-box__links main-paragraph--blue">'
+				
 			html += '<a href="#"><p>' + results[i].title +'</p></a>'
-	html += '<div class="row justify-center">'
-			html += '<div class="flex-column flex-column--50 ta-center" >'
-		      html += '<form action="#" method="post" enctype="multipart/form-data">'
-			 	
-		       html += '<button class="primary-button mt-15 width-100 d-block"   type="submit">Eliminar articulo</button>'
+			
+			html += '<div class="row justify-center">'
+				
+				html += '<div class="flex-column flex-column--50 ta-center" >'
+					
+					
+		     		 html += '<form action="ServletArticle" method="post" enctype="multipart/form-data">'
+						  
+				 		// Campo oculto para el ID del artículo -->
+				 		html += '<input type="hidden" name="id" value="' + results[i].id + '">';
+						// Campo oculto para la operación
+						html += '<input type="hidden" name="op" value="3">';
+			 			
+		       		html += '<button class="primary-button mt-15 width-100 d-block"  type="submit">Eliminar articulo</button>'
 		    		
-			html += '</form>'
+					html += '</form>'
+			
+			
 		   html +=  '</div>'
 		    
-		   html +=  '<div class="flex-column flex-column--50 ta-center" >'
-		     html +=   '<form action="#" method="post" enctype="multipart/form-data">'
-			 	
+		   		html +=  '<div class="flex-column flex-column--50 ta-center" >'
+		   
 		      
-				html += '<a href="ServletArticleList?id=' + results[i].id + '&op=2"><button class="primary-button mt-15 width-100 d-block" type="submit">Editar artículo</button></a>';
-		    		
-				html += '</form>'
+					html += '<a href="article_editor.html?id=' + results[i].id + '&op=2"><button class="primary-button mt-15 width-100 d-block" type="button">Editar artículo</button></a>';
+
+		    
+		    html += '</div>' 
+		    
+		    
+		     html +=  '<div class="flex-column flex-column--50 ta-center" >'
+		 
+					html += '<a href="article_editor.html?id=' + results[i].id + '&op=1"><button class="primary-button mt-15 width-100 d-block" type="button">Crear artículo</button></a>';
+
+		    
 		    html += '</div>' 
 			  
 		html += '</div> '

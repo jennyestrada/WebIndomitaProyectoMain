@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import modelo.ArticleEditor;
+import modelo.Utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,15 +42,13 @@ public class ServletArticleList extends HttpServlet {
 		/*
 		 * @Metodo para recuperar el parametro que le indico
 		 */
-		int id = Integer.parseInt(request.getParameter("id"));
-		int option = Integer.parseInt(request.getParameter("op"));
 		
-		if (option == 2) {
+		
 			
-		}else {
-			String responseJson="";
+		
 			try {
-				responseJson = new ArticleEditorDao().articleListJson();
+				ArrayList<ArticleEditor> articleList = new ArticleEditorDao().ArticleList();
+				String responseJson = new Utils().convertToJson(articleList);
 				PrintWriter printWriterResponse = response.getWriter();
 				printWriterResponse.print(responseJson);
 				
@@ -58,7 +57,7 @@ public class ServletArticleList extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}
+		
 		
 		
 		
