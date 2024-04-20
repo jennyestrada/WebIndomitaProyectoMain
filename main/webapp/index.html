@@ -70,12 +70,13 @@
 	html += '<div class="flex-column flex-column--65 relative-position image-article-box background-image" style="background-image: url(\'images/' + results[0].image + '\');">';
        html +=   '</div>'
 
-      html +=   '<div class="flex-column--50  article-box__topdescrip  main-paragraph--white mt-15" >'
+      html +=   '<div class="flex-column--50 article-box__topdescrip  main-paragraph--white mt-15" >'
        html +=   '<p >Premium</p>'
       html +=   '<h3 class="paragraph-top">' + results[0].title + '</h3>'
        html +=  '<p>' + results[0].excerpt + '</p>'
        html +=   '<div class="article-box__small">'
-       html +=    '<p>Leer artículo</p>'   
+       html +=    '<a href="article.html?id='+ results[0].id+'"><button class="primary-button mt-15 width-100 d-block" type="button">Leer artículo</button></a>'  
+  
                 
         html +=    '</div>'
     
@@ -101,7 +102,9 @@
                     
                    html +=  				'<p>' + results[i].excerpt + '</p>'
                    html +=        	'<div class="article-box__small">'
-                       html +=     			 '<p>Leer artículo</p>'   
+                     
+                   html +=    '<a href="article.html?id='+ results[i].id+'"><button class="primary-button mt-15 width-100 d-block" type="button">Leer artículo</button></a>'  
+  
                                 
                         html +=     '</div>'
 

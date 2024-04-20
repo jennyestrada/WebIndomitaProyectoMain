@@ -119,7 +119,12 @@ public class ServletArticle extends HttpServlet {
 		}else if (op == 3) {
 			int id = Integer.parseInt(request.getParameter("id"));
 			ArticleEditor articleEditor = new ArticleEditor(id);
-			articleEditor.delete();
+			try {
+				articleEditor.delete();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		

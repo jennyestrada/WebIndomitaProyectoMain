@@ -89,4 +89,14 @@
     <servlet-name>ServletArticleList</servlet-name>
     <url-pattern>/ServletArticleList</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletFavorites</display-name>
+    <servlet-name>ServletFavorites</servlet-name>
+    <servlet-class>controlador.ServletFavorites</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletFavorites</servlet-name>
+    <url-pattern>/ServletFavorites</url-pattern>
+  </servlet-mapping>
 </web-app>

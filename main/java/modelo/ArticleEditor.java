@@ -47,11 +47,16 @@ public class ArticleEditor {
 	}
 	
 	
+
 	
-	
-	
-	
-	
+	public ArticleEditor(int id) {
+		super();
+		this.id = id;
+	}
+
+
+
+
 	// creo metodo insert en la clase ArticleEditor 
 	
 	
@@ -143,6 +148,8 @@ public class ArticleEditor {
 		ArticleEditorDao articleEditordao = new ArticleEditorDao();
 		articleEditordao.delete(this.getId());
 	}
+	
+	
 	
 	
 	

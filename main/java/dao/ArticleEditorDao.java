@@ -83,7 +83,7 @@ public class ArticleEditorDao {
 	
 	public void delete (int articleId) throws SQLException {
 		String sql = "UPDATE article SET deleted = 1 WHERE id = "+ articleId;
-		;
+		
 			
 		PreparedStatement preparedstatement = con.prepareStatement(sql);
 		
@@ -131,10 +131,11 @@ public class ArticleEditorDao {
 		
 		// quiero que me salgas los ultimos articulos metidos, es 
 		// decir los mas nuevos tendra un id mas alto.
-		String slq = "SELECT * FROM article ORDER BY id DESC";
+		
+		String sql = "SELECT * FROM article WHERE DELETED = 0 ORDER BY id DESC";
 		
 		// le envio la selentencia sql que acabo de hacer al PreparedStatement
-		PreparedStatement preparedstatement = con.prepareStatement(slq);
+		PreparedStatement preparedstatement = con.prepareStatement(sql);
 		
 		// recupeero los datos mediante la conexipon Resutset y loe meto en la variable result
 		// con el executeQuery me devuelve datos.

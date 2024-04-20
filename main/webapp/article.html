@@ -9,6 +9,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css/styles.css">
 
+
+ 	<script type="text/javascript">
+	 window.onload = function() {
+	// al cargar la ventana
+	// extraemos los parametros de Op y id de la URL 
+	// necearios para saber que opcion ejecutar y la Id del articulo a editar.	
+	let queryStrings = new URLSearchParams(window.location.search);
+	let parametersGet = Object.fromEntries(queryStrings.entries());
+	console.log(parametersGet);
+	
+		// XMLHttpRequest Es un obejto de JAVASCRITO, con este obejto lo que hace 
+		// le usuario se hace en segundo plano, es decir no lo saca de la panatalla
+		// si genera un evento.
+		//------------------------------------------------------------------------------
+    	
+    	 // identificamos si el op 1 o op 2, si es 2 entra en el if
+    	
+    	 
+    	// 1 - creo el objeto xhr
+	      let xhr = new XMLHttpRequest();
+	      let results;
+	      
+	     // 2 - onreadystatechange este metodo revisa los estados de la conexion la final es la 4, la que le interesa
+	     // si manda un 200 quiere decir que todo va bien solo que no lo vemos como el 404.
+	   			 xhr.onreadystatechange = function () {
+                   if (xhr.readyState === 4){
+                       if (xhr.status === 200) {
+                         try{
+		// 3 - mediante la clase javascript JSON me parsee el texto que me envia el Servlet	
+		// y los metera en la variable results	
+ 
+                    	 results = JSON.parse(xhr.responseText);            
+                    	//document.getElementById('usuario').innerHTML = usuario.nombre + " <a href='CerrarSesion'>CerrarSesión</a>";
+                         }catch (e) {
+							// TODO: handle exception
+							//location.href = "login.html";
+						}
+                       }                    
+                   }
+               };
+               
+       // 4 - ponemos GET porque para traer los datos usamos el metodo GET
+       // tambien ponemos el nombre del Servlet
+		
+               xhr.open("GET", "ServletArticle?id=" + parametersGet.id, false);
+               xhr.setRequestHeader("Content-Type", "application/json");// esto es opcional
+               xhr.send();
+  
+			   // textContent para traer el contenido no se pone value en este caso
+			  	document.getElementById("title").textContent = results.title;
+			    document.getElementById("paragraph").textContent = results.text; 
+			    document.getElementById("image").src = "/images/" + results.image;
+			    document.getElementById("hiddenIdArticle").value= parametersGet.id;
+			    console.log(results);
+			    
+    	
+    
+    }
+   
+
+</script>
+
+
+
+
+
 </head>
 <body>
     <nav>
@@ -29,25 +95,33 @@
      </nav>
 
         <div class="container">
+			 <form action="ServletFavorites" class="width-100 d-block"  method="post"   enctype="multipart/form-data">
+
+				<input id="hiddenIdArticle" type="hidden" name="hiddenIdArticle" value="-1">
+            	<input id="hiddenIdAccess" type="hidden" name="hiddenIdAccess" value="1">
+            	<button class="primary-button mt-15" type="submit">Añadir a favoritos</button>
+
+			 </form>
+			 
+			 
+			 
             <h1 class="main-title">ARTICULO</h1>
+            
+            
+            
+            
             <div class="article-img  main-paragraph--blue main-paragraph">
-                <p>Añadir a favoritos</p>
-               
+			 <img id="image" />
+	
                 <div class="article-box">
                        
                 </div>
             </div>
             <div class="article-description  main-paragraph--blue">
 
-                <h3>Título artículo 1</h3>  
-                <p class="main-paragraph">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie sed mi eu consequat. Suspendisse molestie tellus ut metus pretium rhoncus. Aliquam a mi condimentum, imperdiet tellus sit amet, aliquam nulla. Sed id ipsum at orci fringilla accumsan. Suspendisse in ex ac justo tincidunt fermentum sit amet id purus. Aenean euismod mi gravida accumsan sodales. In at imperdiet mauris. Maecenas eget magna fringilla, condimentum nibh et, imperdiet nunc.
+                <h1 id="title">Título artículo 1</h1>  
+                <p id="paragraph" class="main-paragraph">
                     
-                    Donec quis tortor eget dolor efficitur venenatis eget et lacus. Sed sed sagittis sapien, nec viverra magna. Praesent nec malesuada metus. Mauris volutpat ante vel nisl aliquet eleifend. Etiam iaculis aliquet urna, eget interdum tortor ornare nec. Sed tellus ex, euismod id pharetra ut, venenatis ut urna. Etiam at lacus at quam ullamcorper eleifend id sollicitudin neque. Curabitur malesuada convallis turpis commodo blandit. Vestibulum sagittis eros mollis dolor luctus pharetra.
-                    
-                    Nulla nisi massa, interdum sit amet tellus ac, ultrices dictum ante. Proin ut posuere urna. In eget nunc fermentum, egestas urna vitae, fringilla elit. Quisque venenatis mi vel nisi convallis maximus. Etiam tincidunt metus eu mi condimentum vehicula. Praesent condimentum nulla tortor, vel ultrices est varius nec. Donec convallis ex massa, aliquet dapibus augue gravida sollicitudin. Mauris efficitur vel dolor vitae vestibulum. Donec vehicula pharetra nunc, quis finibus mauris blandit ac.
-                    
-                    Vivamus non ultrices magna, id mattis ex. purus. 
                 </p>
                     
                 </div>
