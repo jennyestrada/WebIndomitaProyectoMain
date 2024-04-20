@@ -27,7 +27,6 @@ public static Connection con = null;
 		
 		 preparedstatement.setInt(1,idAccess);
 		 preparedstatement.setInt(2,idArticle);
-		
 		 int rows = preparedstatement.executeUpdate();
 		 preparedstatement.close();
 		
