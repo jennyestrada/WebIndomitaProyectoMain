@@ -3,6 +3,7 @@ package modelo;
 
 import java.sql.SQLException;
 
+import controlador.LoginDao;
 import dao.AccessDao;
 
 
@@ -20,10 +21,19 @@ public class Access {
   		super();
   	}
   	
-  	
 
 
-  	// sin id
+  // para usar en el post del servlet
+  	public Access(String password, String email) {
+		super();
+		this.password = password;
+		this.email = email;
+	}
+
+
+
+
+	// sin id
 	public Access(String fullname, String password, String email) {
 		super();
 		this.fullname = fullname;
@@ -96,6 +106,14 @@ public class Access {
 		AccessDao accessdao = new AccessDao ();
 		accessdao.insert(this);
 	}
+	
+	
+	public void searchUser() throws SQLException {
+		LoginDao logindao = new LoginDao ();
+		logindao.searchLogin(this);
+	}
+	
+	
 
 
 

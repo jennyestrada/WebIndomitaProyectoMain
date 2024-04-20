@@ -54,8 +54,9 @@ public class ServletFavorites extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
-		// Obtener los valores de los campos hidden del formulario
+
+		//Obtener los valores de los campos hidden del form
+		// 
 		int idArticle = Integer.parseInt(request.getParameter("hiddenIdArticle"));
 		int idAccess = Integer.parseInt(request.getParameter("hiddenIdAccess"));
 		
@@ -67,7 +68,7 @@ public class ServletFavorites extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		
 		
 		
