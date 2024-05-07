@@ -141,7 +141,10 @@ public class ArticleEditor {
 	}
 	
 	/*
-	 * @Metodo para eliminar articulos entero usando su Pk "id"
+	 * @Metodo para borrar articulo.
+	 * creamos objeto tipo ArticleEditorDao y llamamos a su metodo "delete"
+	 * de parametro le pasamos el get id de la clase.
+	 * ahora este metodo "delete" lo llamamos desde el doPost del Servlet.
 	 */
 	
 	public void delete() throws SQLException {

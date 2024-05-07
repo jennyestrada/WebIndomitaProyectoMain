@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css/styles.css">
+    <script src="scripts/SessionStorage.js"></script>
 
 </head>
 <body>
@@ -30,13 +31,13 @@
      </nav>
 
         <div class="container">
-            <h1 class="main-title">ACEDER A NUESTRA REVISTA DIGITAL</h1>
+            <h1 class="main-title">ACCEDER A NUESTRA REVISTA DIGITAL</h1>
             
             <div class="content-box">
                 
                         
-                        <form action="ServletLogin" method="post" width-100 d-block">
-                            <di class="row">
+                        <form  action="ServletLogin" method="post" id="form1" name="form1"  class="width-100 d-block">
+                            <div class="row">
 
                                 
                                 <div class="flex-column--15">
@@ -44,7 +45,7 @@
                                 </div>  
 
                                 <div class="flex-column--85  comment-box main-paragraph">
-                                    <input class="width-50 mt-15 border-field"    type="email" name="email" placeholder="Escribe un email...">
+                                    <input id="email"  class="width-50 mt-15 border-field"    type="email" name="email" placeholder="Escribe un email...">
                                 </div>
 
                                 <div class="flex-column--15">
@@ -52,11 +53,11 @@
                                 </div>
 
                                 <div class="flex-column--85  comment-box main-paragraph">
-                                    <input  class="width-50 mt-15 border-field" type="password" name="password" placeholder="Ingresa una contraseña...">
+                                    <input id="password"   class="width-50 mt-15 border-field" type="password" name="password" placeholder="Ingresa una contraseña...">
                                 </div>
                                 
                                 
-                                <button class="primary-button mt-15"   type="submit">Acceder</button>
+                                <button class="primary-button mt-15" onclick="submiteLogin()">Acceder</button>
                             </div>      
                         </form>
 

@@ -40,14 +40,7 @@ public class ServletUserList extends HttpServlet {
 		// creamos variable de tipo string con la respuesta que envia JSON 
 		
 		String responseJson="";
-		
-		try {
-			responseJson = new AccessDao().convertJson();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	
 		// una vez lo tenemos en formato json llamamos al objeto PrinWriter para 
 		// que se vea en la pantalla del usuario.
 		// con el objeto response llamamo a su metodo getWiter

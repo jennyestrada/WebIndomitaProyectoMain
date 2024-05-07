@@ -16,11 +16,11 @@ import modelo.ArticleEditor;
 
 public class ArticleEditorDao {
 	
-	public static Connection con = null;
-	
 	/*
-	 * @Metodo para conectarnos a BDconexion.
+	 * @Metodo para conectarnos a BDconexion, usamos la clase de java 
+	 * Connection
 	 */
+	public static Connection con = null;
 	
 	public ArticleEditorDao () throws SQLException {
 		this.con = DBConexion.getConexion();
@@ -29,13 +29,17 @@ public class ArticleEditorDao {
 
 	/*
 	 * @Metodo insertar datos de articulo en la BBDD 
+	 * usamos el PreparedStatement preparedstatement
+	 * interregantes por cada valor title, text....
+	 * 
+	 * creamo un objeto de tipo ArticleEditor llamado articleEditor y 
+	 * usando los getters llamamos al title text image...
+		
 	 */
-	
 	
 	public void insert (ArticleEditor articleEditor ) throws SQLException {
 		String sql = "INSERT INTO article (TITLE,TEXT,IMAGE,EXCERPT)"
-				+ " VALUES (?,?,?,?)";// interregantes por cada valor nombre clase matricula...falta la foto
-		
+				+ " VALUES (?,?,?,?)";
 		PreparedStatement preparedstatement = con.prepareStatement(sql);
 		
 		 preparedstatement.setString(1,articleEditor.getTitle());
@@ -78,8 +82,13 @@ public class ArticleEditorDao {
 	/*
 	 * @Metodo para borrar un articulo, cerramos el PreparedStatement 
 	 * para liberar recursos y evitar posibles pérdidas de memoria 
-	 * o conexiones no cerradas.
+	 * o conexiones no cerradas.Metodo que se llamara desde 
+	 * el Servlet mediante un doGet.
+	 * @param en este caso debe ser un int porque id es int.
+	 * el valor de este viene desde el metodo delete de la clase.
+	 * este sera el id al que se le asigne 1 en la tabla.
 	 */
+	
 	
 	public void delete (int articleId) throws SQLException {
 		String sql = "UPDATE article SET deleted = 1 WHERE id = "+ articleId;
@@ -96,9 +105,10 @@ public class ArticleEditorDao {
 	
 	
 	
-	
 	/*
-	 * @Metodo para obtener datos de articulos al que corresponda el id. 
+	 * @Metodo para obtener y devolver todos los datos del articulo al que corresponda 
+	 * el id.Se crea un objeto, en este se mete la seleccion que hace el execute.
+	 * por tanto este metodo nos devuelve toda la inform. que compone del articulo.
 	 */
 	public ArticleEditor articleById(int id) throws SQLException {
 		
@@ -111,10 +121,7 @@ public class ArticleEditorDao {
 		
 		ArticleEditor article = new ArticleEditor(result.getInt("id"),result.getString("title"),result.getString("text"),result.getString("image"),result.getString("excerpt"));
 		
-		return article;
-		
-		
-		
+		return article;	
 	}
 
 	
@@ -122,40 +129,44 @@ public class ArticleEditorDao {
 	
 	
 	/*
-	 * @Metodo para obtener datos y meterlos en el arrylista de tipo ArticleEditor
+	 * @Metodo para obtener datos y meterlos en el arrylist de tipo ArticleEditor
 	 * mediante un select ordenando los datos en orden descendiente.
+	 * y que tome aquellos cuya columna deleted sea 0.
+	 * 
+	 * Envio la selentencia sql que acabo de hacer al PreparedStatement.
+	 * Ejecuto, mediante el "executeQuery" y lo guardo el la variable de tipo
+	 * ResulSet "result"
+	 * 
+	 * Creo un ArrayList "arraylist" aqui meto los datos que trae el "ResultSet result"
+	 * 
+	 * El "arraylist" creado anteriormente, lo meto dentro del bucle while
+	 * y le digo que mientras hayan filas llenas en la variable "result",saque 
+	 * los datos de esta y los añada en el mismo orden en el que
+	 * tenemos ordenada las columnas en la BBDD. 
+	 * 
+	 * Nos devolvera una coleccion que debemos convertir a JSON en el 
+	 * doGet del Servlet.
+	 * 
+	 * Ojo, los SELECT nos devuelven un ResultSet. 
 	 */
 	
 	
 	public ArrayList<ArticleEditor> ArticleList() throws SQLException{
 		
-		// quiero que me salgas los ultimos articulos metidos, es 
-		// decir los mas nuevos tendra un id mas alto.
 		
 		String sql = "SELECT * FROM article WHERE DELETED = 0 ORDER BY id DESC";
 		
-		// le envio la selentencia sql que acabo de hacer al PreparedStatement
 		PreparedStatement preparedstatement = con.prepareStatement(sql);
-		
-		// recupeero los datos mediante la conexipon Resutset y loe meto en la variable result
-		// con el executeQuery me devuelve datos.
 		ResultSet result = preparedstatement.executeQuery();
 		
-		// creo un arraylist donde pasare los datos que trae el ResultSet result
+		
 		ArrayList<ArticleEditor> articleList = new ArrayList<ArticleEditor>();
 		
-		// le digo recorre la coleccion resulset de tipo ResultSet, al usa next recorre de fila en fila
-		// y nos va dando los datos de cada una
 		
 		while (result.next()) {
 	
-			// al array article  de tipo ArticleEditor, creo una nueva nava para darle 
-			// toda la fila que me devuelve 
-			// el orden de id title tex .... es el mismo que el la BBDD
-			
 			articleList.add(new ArticleEditor(result.getInt("id"),result.getString("title"),result.getString("text"),result.getString("image"),result.getString("excerpt")));
-						
-				
+								
 		}	
 		return 	articleList;
 	}

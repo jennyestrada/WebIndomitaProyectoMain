@@ -5,24 +5,23 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modelo.ArticleEditor;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
-import dao.ArtiFavoritesDao;
-
 
 /**
- * Servlet implementation class ServletFavorites
+ * Servlet implementation class ServletSesionLogin
  */
-public class ServletFavorites extends HttpServlet {
+public class ServletSesionLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
+	HttpSession sesion; 
+	
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletFavorites() {
+    public ServletSesionLogin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,62 +31,25 @@ public class ServletFavorites extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
 		
-		//falta traer los articulos a mi lista privada
-		
-		
+		sesion = request.getSession();
+		String name = "jenny";
+		sesion.setAttribute("Nombre",name);
 		
 		
 		
 		
 		
 	}
-	
-	
-	
-	
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-
-		//Obtener los valores de los campos hidden del form
-		// 
-		int idArticle = Integer.parseInt(request.getParameter("hiddenIdArticle"));
-		int idAccess = Integer.parseInt(request.getParameter("hiddenIdAccess"));
-		
-		
-		try {
-			ArtiFavoritesDao favoritesdao = new ArtiFavoritesDao();
-			favoritesdao.insertFavorites(idAccess, idArticle);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-		
-		
-		
-		
-		
-		
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		doGet(request, response);
 	}
 
 }

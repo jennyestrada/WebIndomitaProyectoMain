@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css/styles.css">
+
+	 <script type="text/javascript">
+	
+	
+	
+		
+		window.onload = function() {
+		
+		
+		// XMLHttpRequest Es un obejto de JAVASCRIT
+    	
+    	console.log("entro")
+    	// 1 - creo el objeto xhr
+	      let xhr = new XMLHttpRequest();
+	      let results;
+	      
+	     // 2 - onreadystatechange este metodo revisa los estados de la conexion la final es la 4, la que le interesa
+	     // si manda un 200 quiere decir que todo va bien solo que no lo vemos como el 404.
+	   			 xhr.onreadystatechange = function () {
+                   if (xhr.readyState === 4){
+                       if (xhr.status === 200) {
+                         try{
+		// 3 - mediante la clase javascript JSON me parsee el texto que me envia el Servlet	
+		// y los metera en la variable results		
+
+                    	 results = JSON.parse(xhr.responseText);            
+              
+                    	//document.getElementById('usuario').innerHTML = usuario.nombre + " <a href='CerrarSesion'>CerrarSesión</a>";
+                         }catch (e) {
+							// TODO: handle exception
+							//location.href = "login.html";
+						}
+                      }                    
+                   }
+               };
+               
+       // 4 - ponemos GET porque para traer los datos usamos el metodo GET
+       // tambien ponemos el nombre del Servlet
+		
+               xhr.open("GET", "ServletListaNoticias", false);
+               xhr.setRequestHeader("Content-Type", "application/json");// esto es opcional
+               xhr.send();
+               console.log(results)
+        // 5 - le doy como parametro results, aqui estaria los datos metidos     
+               paint(results);
+    }
+    
+    
+    function paint (results){
+		
+		// 7 - creo una variable html
+		let html = "";
+			for (let i=0;i<results.length; i++){
+			
+				
+			html += '<div id="#" class="menu-box__links main-paragraph--blue">'
+				
+			html += '<a href="#"><p>' + results[i].title +'</p></a>'
+			
+			html += '<div class="row justify-center">'
+				
+				html += '<div class="flex-column flex-column--50 ta-center" >'
+					
+					
+		     		 html += '<form action="ServletNoticiasDOS" method="post" enctype="multipart/form-data">'
+						  
+				 		// Campo oculto para el ID del artículo -->
+				 		html += '<input type="hidden" name="id" value="' + results[i].id + '">';
+						// Campo oculto para la operación
+						html += '<input type="hidden" name="op" value="3">';
+			 			
+		       		html += '<button class="primary-button mt-15 width-100 d-block"  type="submit">Eliminar articulo</button>'
+		    		
+					html += '</form>'
+			
+			
+		   html +=  '</div>'
+		    
+		   		html +=  '<div class="flex-column flex-column--50 ta-center" >'
+		   
+		      
+					html += '<a href="article_editor.html?id=' + results[i].id + '&op=2"><button class="primary-button mt-15 width-100 d-block" type="button">Editar artículo</button></a>';
+
+		    
+		    html += '</div>' 
+		    
+		    
+		     html +=  '<div class="flex-column flex-column--50 ta-center" >'
+		 
+
+		    
+		    html += '</div>' 
+			  
+		html += '</div> '
+	html +=  '</div>'
+				
+			}
+			
+		// 8 - este html es el que le damos al INNERHTML del punto 6
+		
+		
+		//  6 - le digo que localice mi fomulario por el id que le di
+		document.getElementById("ArticleList").innerHTML=html;
+	}
+    </script>
+    
+</head>
+<body>
+    <nav>
+        <div class="header-logo" >
+         <img class="responsive-image" src="/imagenes/logo indomita.png" alt="logo indomita">
+         </div>
+         <div>
+             <ul class="nav-links"> 
+                 <li ><a href="#"><p>Cerrar sesión</p></a></li>
+              </ul>        
+         </div>       
+     </nav>
+     
+     
+     
+     
+	 <div class="container">
+		
+	
+	<a href="article_editor.html?op=1"><button class="primary-button mt-15 width-100 d-block" type="button">Crear artículo</button></a>
+
+		
+		<h1 class="main-title">LISTA DE ARTICULOS</h1>
+	         
+	    <div id="ArticleList">
+			
+		</div>
+
+	</div>
+                       
+							   
+ 
+    <div class="footer-container">
+        <h3>INDOMITA CREATIVA</h3>
+            <p>Contacto:</p>
+            <p>indomita@indomita.es</p>
+                <div class="footer-container__row">
+                    <p>
+                        <a href="#">Política de privacidad</a>
+                    </p>
+                    <p>
+                        <a href="#">Política de cookies</a>
+                    </p> 
+                    <p>
+                        <a href="#">Aviso legaL</a>
+                    </p>        
+                </div>
+
+
+        </div>   
+</body>
+</html>

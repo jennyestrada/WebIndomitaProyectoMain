@@ -3,8 +3,9 @@ package modelo;
 
 import java.sql.SQLException;
 
-import controlador.LoginDao;
+
 import dao.AccessDao;
+import dao.LoginDao;
 
 
 
@@ -13,23 +14,44 @@ public class Access {
 	private String fullname;
     private String password;
     private String email;
+    private boolean isAdmin;
     
     
     
-    
-  	public Access() {
+  
+
+	public Access() {
   		super();
   	}
+	
+	
+	
+	
   	
 
 
-  // para usar en el post del servlet
+	// para usar en el post del servlet
   	public Access(String password, String email) {
 		super();
 		this.password = password;
 		this.email = email;
 	}
 
+
+
+ // para usar en el login 
+	public Access(int id, String fullname, boolean isAdmin) {
+		super();
+		this.id = id;
+		this.fullname = fullname;
+		this.isAdmin = isAdmin;
+	}
+	
+	
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
 
 
 
@@ -55,9 +77,12 @@ public class Access {
 
 
 
+
+
 	public int getId() {
 		return id;
 	}
+
 
 
 
@@ -101,26 +126,46 @@ public class Access {
 		this.email = email;
 	}
 	
+
 	
+	public boolean getIsAdmin() {
+		return isAdmin;
+	}
+	
+	
+	
+	public void setIsAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+
+
+
+
+
+
 	public void insert() throws SQLException {
 		AccessDao accessdao = new AccessDao ();
 		accessdao.insert(this);
 	}
 	
 	
-	public void searchUser() throws SQLException {
-		LoginDao logindao = new LoginDao ();
-		logindao.searchLogin(this);
+	public Access searchUser() throws SQLException {
+		AccessDao accessdao = new AccessDao ();
+		 Access accessLogin = accessdao.searchLogin(this);
+		return accessLogin;
 	}
-	
-	
 
 
 
 	@Override
 	public String toString() {
-		return "Access [fullname=" + fullname + ", password=" + password + ", email=" + email + "]";
+		return "Access [id=" + id + ", fullname=" + fullname + ", password=" + password + ", email=" + email
+				+ ", isAdmin=" + isAdmin + "]";
 	}
+	
+	
+
 	
 	
 	

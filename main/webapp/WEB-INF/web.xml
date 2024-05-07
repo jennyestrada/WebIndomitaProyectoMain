@@ -109,4 +109,44 @@
     <servlet-name>ServletLogin</servlet-name>
     <url-pattern>/ServletLogin</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletNoticias</display-name>
+    <servlet-name>ServletNoticias</servlet-name>
+    <servlet-class>controlador.ServletNoticias</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletNoticias</servlet-name>
+    <url-pattern>/ServletNoticias</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletNoticiasDOS</display-name>
+    <servlet-name>ServletNoticiasDOS</servlet-name>
+    <servlet-class>controlador.ServletNoticiasDOS</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletNoticiasDOS</servlet-name>
+    <url-pattern>/ServletNoticiasDOS</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletListaNoticias</display-name>
+    <servlet-name>ServletListaNoticias</servlet-name>
+    <servlet-class>controlador.ServletListaNoticias</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletListaNoticias</servlet-name>
+    <url-pattern>/ServletListaNoticias</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletSesionLogin</display-name>
+    <servlet-name>ServletSesionLogin</servlet-name>
+    <servlet-class>controlador.ServletSesionLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletSesionLogin</servlet-name>
+    <url-pattern>/ServletSesionLogin</url-pattern>
+  </servlet-mapping>
 </web-app>

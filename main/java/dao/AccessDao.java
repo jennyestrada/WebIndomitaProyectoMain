@@ -57,13 +57,51 @@ public class AccessDao {
 		return result;
 	}
 	
-	// necesitamos convertir la info a un formato JSON  creamo el metodo.
-		public String convertJson() throws SQLException {
-			String convertJson= " ";
-			Gson gson= new Gson();
-			convertJson = gson.toJson(this.userList());
-			System.out.println(convertJson);
-			return convertJson;
+		
+		
+		/*
+		 * @Metodo para verificar si el email y contrasenia existen en
+		 * la bbdd,si existe, toma en id del usuario y retorna 
+		 * el valor del Id, este se guarda en la varible iduser. 
+		 * desde el Servlet (doPost) llamo a este metodo.
+		 * finalmente cerramos recursos con el resultSet.close
+		 * y preparedStatement.close.
+		 */
+	
+		public Access searchLogin(Access searchlogin) throws SQLException {
+			
+			String sql = "SELECT ID, FULLNAME, ISADMIN  FROM access WHERE EMAIL = ? AND PASSWORD = ?";
+					
+			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			
+			preparedStatement.setString(1,searchlogin.getEmail());
+			preparedStatement.setString(2,searchlogin.getPassword());
+						
+			ResultSet resultSet = preparedStatement.executeQuery();
+			System.out.println(resultSet);
+			
+			
+		    if (resultSet.next()) {
+		    	// si esta en la bbdd devuelve objeto lleno.
+		    	System.out.println("El email y la contraseña son correctos.");
+		    	Access 	accessLogin = new Access(resultSet.getInt("id"),resultSet.getString("fullname"),resultSet.getBoolean("isAdmin")); 
+		    	resultSet.close();
+				preparedStatement.close();
+		    	return accessLogin;    	
+		   
+		    } else {
+		        System.out.println("El email o la contraseña son incorrectos.");
+		    }
+			
+		    resultSet.close();
+		    preparedStatement.close();
+		    // si no hay nada en bbdd devuelve objeto vacio.
+		    return new Access();
+		 
 		}
+		
+		
+		
+		
 
 }

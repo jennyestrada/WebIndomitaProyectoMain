@@ -1,4 +1,4 @@
-package controlador;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,11 +15,18 @@ public static Connection con = null;
 	public LoginDao() throws SQLException {
 		this.con = DBConexion.getConexion();
 	}
+		/*
+		 * @Metodo para verificar si el email y contrasenia existen en
+		 * la bbdd,si existe, toma en id del usuario y retorna 
+		 * el valor del Id, este se guarda en la varible iduser. 
+		 * desde el Servlet (doPost) llamo a este metodo.
+		 * finalmente cerramos recursos con el resultSet.close
+		 * y preparedStatement.close.
+		 */
 	
-	
-		public void searchLogin(Access searchlogin) throws SQLException {
+		public int searchLogin(Access searchlogin) throws SQLException {
 			
-			 String sql = "SELECT ID FROM access WHERE EMAIL = ? AND PASSWORD = ?";
+			String sql = "SELECT ID FROM access WHERE EMAIL = ? AND PASSWORD = ?";
 					
 			PreparedStatement preparedStatement = con.prepareStatement(sql);
 			
@@ -28,30 +35,24 @@ public static Connection con = null;
 			
 			
 						
-			 ResultSet resultSet = preparedStatement.executeQuery();
-			 System.out.println(resultSet);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			System.out.println(resultSet);
 			 
 			 
-			 int iduser = -1;
+			int iduser = -1;
 			 
-		    // Verificar si se encontró algún resultado
 		    if (resultSet.next()) {
-		    	// Se encontró un usuario con el email y la contraseña proporcionados
-		        // Obtén el ID del usuario de la fila obtenida
+		    	
 		    	iduser = resultSet.getInt("ID");
 		    	System.out.println("El email y la contraseña son correctos.");
 		        System.out.println(iduser);
-		        
 		    } else {
-		        // No se encontró ningún usuario con el email y la contraseña proporcionados
 		        System.out.println("El email o la contraseña son incorrectos.");
 		    }
 			
-			
-		    // Cerrar recursos
 		    resultSet.close();
 		    preparedStatement.close();
-			
+			return iduser;
 		 
 		}
 		
@@ -67,3 +68,5 @@ public static Connection con = null;
 	
 
 }
+
+

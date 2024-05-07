@@ -46,11 +46,16 @@ public class ServletArticle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		/*
-		 * @Metodo para pedir los datos de articulo,
-		 * que ha traido el dao de la bbdd y convertirlos a Json
-		 * en mi caso cree un metodo convertToJson en la clase Utils
+		 * @Metodo creo objeto "article" y llamo al Dao y el metodo que 
+		 * devuelve el articulo completo "articleById(id)", creo otro objeto
+		 * "responseJson" y llamo al metodo que convierte a JSON "convertToJson" 
+		 * le paso el objeto "article" como parametro.
+		 * usamos el PrintWriter para mostrar el objeto que tiene la info
+		 * en formato JSON.La clase de java PrintWriter imprime archivos 
+		 * de texto formateados.
+		 * 
 		 */
-		
+
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			
@@ -82,13 +87,20 @@ public class ServletArticle extends HttpServlet {
 		
 		if (op == 1 || op == 2) {
 			
-			// request solo lo lee como string por ello
+			/*
+			 * @Metodo request solo lo lee como string por ello
 			// las imagenes las pasamos a string, en mi caso este
-			// conversion la hace un metodo de la clase Utils
+			// conversion la hace un metodo de la clase Utils. 
+			 * OJO importante usamos enctype="multipart/form-data 
+			 * asi que en el servlet ponemos @MultipartConfig
+			 * para que lea el part.
+			 */
+			
+			
+			
 			String title = request.getParameter("title");
 			String text = request.getParameter("text");
 			Part part = request.getPart("image");
-			//Path path = Paths.get(part.getSubmittedFileName());
 			String fileName = Utils.getImage(part);
 			String excerpt = request.getParameter("excerpt");
 			System.out.println(title + text + fileName + excerpt );
@@ -107,6 +119,7 @@ public class ServletArticle extends HttpServlet {
 			}else if(op == 2) {
 				int id = Integer.parseInt(request.getParameter("id"));
 				ArticleEditor articleEditor = new ArticleEditor(id,title,text,fileName,excerpt);
+			
 				try {
 					articleEditor.update();
 				} catch (SQLException e) {

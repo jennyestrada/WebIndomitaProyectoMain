@@ -18,12 +18,9 @@
 	let parametersGet = Object.fromEntries(queryStrings.entries());
 	console.log(parametersGet);
 	
-		// XMLHttpRequest Es un obejto de JAVASCRITO, con este obejto lo que hace 
-		// le usuario se hace en segundo plano, es decir no lo saca de la panatalla
-		// si genera un evento.
-		//------------------------------------------------------------------------------
+	// XMLHttpRequest Es un obejto de JAVASCRIT.
     	
-    	 // identificamos si el op 1 o op 2, si es 2 entra en el if
+    // identificamos si el op 1 o op 2, si es 2 entra en el if
     	 document.getElementById("hiddenOp").value= parametersGet.op;
     	 
     	 
@@ -40,7 +37,7 @@
                    if (xhr.readyState === 4){
                        if (xhr.status === 200) {
                          try{
-		// 3 - mediante la clase javascript JSON me parsee el texto que me envia el Servlet	
+		// 3 - mediante la clase javascript JSON me parsea el texto que me envia el Servlet	
 		// y los metera en la variable results	
  
                     	 results = JSON.parse(xhr.responseText);            

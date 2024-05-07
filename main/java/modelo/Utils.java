@@ -60,7 +60,8 @@ public class Utils<T> {
 	
 	/*
 	 * @Metodo para convertir los datos que trae el arraylist a JSON
-	 * necesitamos importar librerias.
+	 * necesitamos importar librerias.tengo que crear un objeto para llamarla
+	 * porque no me deja crearla como static.
 	 */
 	
 	public String convertToJson(T object) {
