@@ -50,24 +50,6 @@ public class ServletUserList extends HttpServlet {
 		
 		}
 		
-		// esto solo impirme los dato en consola, necesitamos convertir esta info a formato JSON 
-		
-		/*try {
-		ArrayList<Access> accessList = new AccessDao().userList();
-		
-		for (Access a : accessList) {
-			System.out.println(a.toString());
-			
-		}
-		}catch (SQLException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		}
-		*/
-		
-		
-		
-	
 	
 	
 

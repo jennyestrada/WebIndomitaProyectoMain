@@ -6,6 +6,13 @@ import com.google.gson.Gson;
 
 import dao.ArticleEditorDao;
 
+
+
+/**
+ * @Author: Jenny Estrada Sanabria
+ */
+
+
 public class ArticleEditor {
 	private int id;
 	private String title;
@@ -47,8 +54,17 @@ public class ArticleEditor {
 	}
 	
 	
+	public ArticleEditor(int id, String title, String text, String image) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.text = text;
+		this.image = image;
+	}
 
-	
+
+
+
 	public ArticleEditor(int id) {
 		super();
 		this.id = id;
@@ -122,8 +138,9 @@ public class ArticleEditor {
 	}
 
 
-	/*
-	 * @Metodo para insertar informacion en el formulario articulo
+	/**
+	 * Metodo para insertar informacion de un articulo.Se crea un objeto que llama
+	 * al metodo insert del Dao.
 	 */
 	public void insert() throws SQLException {
 		ArticleEditorDao articleEditordao = new ArticleEditorDao();
@@ -132,21 +149,20 @@ public class ArticleEditor {
 	
 	
 
-	/*
-	 * @Metodo para actualizar informacion de un articulo
+	/**
+	 * Metodo para actualizar informacion de un articulo. Se crea un objeto que llama
+	 *  al metodo update del Dao.
 	 */
 	public void update() throws SQLException {
 		ArticleEditorDao articleEditordao = new ArticleEditorDao();
 		articleEditordao.update(this);
 	}
 	
-	/*
-	 * @Metodo para borrar articulo.
-	 * creamos objeto tipo ArticleEditorDao y llamamos a su metodo "delete"
-	 * de parametro le pasamos el get id de la clase.
-	 * ahora este metodo "delete" lo llamamos desde el doPost del Servlet.
-	 */
 	
+	/**
+	 * Metodo para borrar articulo. se crea un objeto que llama al metodo delete del Dao.
+	 *
+	 */
 	public void delete() throws SQLException {
 		ArticleEditorDao articleEditordao = new ArticleEditorDao();
 		articleEditordao.delete(this.getId());

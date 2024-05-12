@@ -7,7 +7,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <<link rel="stylesheet" href="styles.css/styles.css">
+    <link rel="stylesheet" href="styles.css/styles.css">
+    <script src="scripts/Sessions.js"></script>
+    
+    <script>
+  		window.onload = function() {
+			launchAuthCheck()
+		}
+	</script>
+  
 
 </head>
 <body>
@@ -15,13 +23,17 @@
         <div class="header-logo" >
          	<img class="responsive-image" src="/imagenes/logo indomita.png" alt="logo indomita">
          </div>
-         <div>
-             <ul class="nav-links"> 
-                <li ><a href="index.html"><p>Inicio</p></a></li>
-                <li ><a href="whoweare.html"><p>Quienes somos</p></a></li>
-                <li ><a href="Loginform.html"><p>Cerrar sesión</p></a></li>
-              </ul>       
-         </div>
+        	 <div>
+             	<ul class="nav-links"> 
+                	<li><a href="index.html"><p>Inicio</p></a></li>
+   					<li><a href="whoweare.html"><p>Quienes somos</p></a></li>
+    				<li id="loginLink"><a href="Loginform.html"><p>Acceso</p></a></li>
+    				<li id="registerLink"><a href="Registerform.html"><p>Registro</p></a></li>
+    				<li id="favoritesLink" style="display: none;"><a href="Userarea.html"><p>Favoritos</p></a></li>
+               	 	<li id="adminLink" style="display: none;"><a href="Admiarea.html"><p>Administracion</p></a></li>
+                	<li id="logoutLink" style="display: none;"><a href="/ProyectoWebIndomita/ServletCloseSession"><p>Cerrar sesión</p></a></li>
+				</ul>       
+         	</div>
         
      </nav>
 
@@ -29,12 +41,10 @@
         <h1 class="main-title">AREA ADMINISTRATIVO</h1>
                   
         <div class="  menu-box__links main-paragraph--blue">
-            <li ><a href="#"><p>Inicio</p></a></li>
-            <li ><a href="#"><p>Quiénes Somos</p></a></li>
-            <li ><a href="#"><p>Artículos</p></a></li>
-            <li ><a href="#"><p>Gestionar comentarios</p></a></li>
-            <li ><a href="#"><p>Eliminar cuentas de usuarios</p></a></li>
-
+            <li ><a href="index_editor.html"><p>Inicio</p></a></li>
+            <li ><a href="whoweare_editor.html"><p>Quiénes Somos</p></a></li>
+            <li ><a href="articlelist.html"><p>Gestionar Artículos</p></a></li>
+            <li ><a href="commenst_editor.html"><p>Gestionar comentarios</p></a></li>    
 		</div>
 	</div>
 

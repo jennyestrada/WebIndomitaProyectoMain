@@ -8,10 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css/styles.css">
+    <script src="scripts/Sessions.js"></script>
 
 
  	<script type="text/javascript">
 	 window.onload = function() {
+			launchAuthCheck()
 	// al cargar la ventana
 	// extraemos los parametros de Op y id de la URL 
 	// necearios para saber que opcion ejecutar y la Id del articulo a editar.	
@@ -60,13 +62,23 @@
 			   // textContent para traer el contenido no se pone value en este caso
 			  	document.getElementById("title").textContent = results.title;
 			    document.getElementById("paragraph").textContent = results.text; 
-			    document.getElementById("image").src = "/images/" + results.image;
+			    document.getElementById("image").src = "\images/" + results.image;
 			    document.getElementById("hiddenIdArticle").value= parametersGet.id;
 			    console.log(results);
 			    
-    	
+			    
+		// Obtener el ID de sesión y asignarlo al campo oculto
+		
+        let sessionId = "<%= session.getId() %>";
+       
+        document.getElementById("hiddenIdAccess").value = sessionId;
+		
+		
+		
     
     }
+    	 
+	
    
 
 </script>
@@ -83,12 +95,15 @@
          </div>
          <div>
              <ul class="nav-links"> 
-                 <li ><a href="#"><p>Inicio</p></a></li>
-                 <li ><a href="#"><p>Quienes somos</p></a></li>
-                 <li ><a href="#"><p>Acceso</p></a></li>
-                 <li ><a href="#"><p>Registro</p></a></li>
- 
-              </ul>
+				<li><a href="index.html"><p>Inicio</p></a></li>
+   				<li><a href="whoweare.html"><p>Quienes somos</p></a></li>
+    			<li id="loginLink"><a href="Loginform.html"><p>Acceso</p></a></li>
+    			<li id="registerLink"><a href="Registerform.html"><p>Registro</p></a></li>
+    			<li id="favoritesLink" style="display: none;"><a href="Userarea.html"><p>Favoritos</p></a></li>
+                <li id="adminLink" style="display: none;"><a href="Admiarea.html"><p>Administracion</p></a></li>
+                <li id="logoutLink" style="display: none;"><a href="/ProyectoWebIndomita/ServletCloseSession"><p>Cerrar sesión</p></a></li>
+
+             </ul>
          
          </div>
         
@@ -98,22 +113,21 @@
 			 <form action="ServletFavorites" class="width-100 d-block"  method="post">
 
 				<input id="hiddenIdArticle" type="hidden" name="hiddenIdArticle" value="-1">
-            	<input id="hiddenIdAccess" type="hidden" name="hiddenIdAccess" value="1">
             	<button class="primary-button mt-15" type="submit">Añadir a favoritos</button>
 
 			 </form>
 			 
 			 
 			 
-            <h1 class="main-title">ARTICULO</h1>
+            <h1 class="main-title">DESCUBRE EL ARTE EN CADA PÁGINA</h1>
             
-            
+           
             
             
             <div class="article-img  main-paragraph--blue main-paragraph">
-			 <img id="image" />
-	
-                <div class="article-box">
+			 <img id="image" class="responsive-image"/>
+				<div class="article-box">
+					
                        
                 </div>
             </div>

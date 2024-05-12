@@ -20,8 +20,11 @@ public class AccessDao {
 	}
 	
 	
-	// creo metodo insertar con un variable que llamare tambien access
-	// pero puede llamarse de otra manera y sera de tipo Access
+	
+	/**
+	 * Metodo para insertar datos de registro de un usuario
+	 * @param access objeto con los datos de fullname, password, email
+	 */
 	
 	public void insert(Access access) throws SQLException {
 		
@@ -36,12 +39,16 @@ public class AccessDao {
 					
 		int filas = preparedStatement.executeUpdate();
 		preparedStatement.close();
-		
-		// NO HACE FALTA CERRAR CONEXION PORQUE DBConexion ES UN OBJETO, CUANDO 
-		// DEJE DE FUNCIONAR EL RECOGERDOR JAVA SE LO CARGA.
+
+		// No hace falta cerrar conexion porque DBConexion es un objeto, cuando deje de fucnionar
+		// el recogedor de java se lo carga
 	}
 	
 	
+	
+	/**
+	 * Metodo para traer lista de usuarios registrados
+	 */
 	private ArrayList<Access> userList() throws SQLException{
 		
 		PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM access");
@@ -58,14 +65,13 @@ public class AccessDao {
 	}
 	
 		
-		
-		/*
-		 * @Metodo para verificar si el email y contrasenia existen en
-		 * la bbdd,si existe, toma en id del usuario y retorna 
-		 * el valor del Id, este se guarda en la varible iduser. 
-		 * desde el Servlet (doPost) llamo a este metodo.
-		 * finalmente cerramos recursos con el resultSet.close
-		 * y preparedStatement.close.
+	
+	
+		/**
+		 * Metodo para verificar si el email y contrasenia existen en
+		 * la bbdd,si existe, toma en id fullname isAdmin y lo trae.
+		 * @param Access searchlogin objeto que trae el email y password.
+		 * @return objeto con id fullname y isAdmin
 		 */
 	
 		public Access searchLogin(Access searchlogin) throws SQLException {

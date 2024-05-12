@@ -5,8 +5,11 @@ import java.sql.SQLException;
 
 
 import dao.AccessDao;
-import dao.LoginDao;
 
+
+/**
+ * @author jenny Estrada Sanabria
+ */
 
 
 public class Access {
@@ -140,10 +143,9 @@ public class Access {
 
 
 
-
-
-
-
+	/**
+	 * Metodo para resgistro de un usuario en la base de datos
+	 */
 	public void insert() throws SQLException {
 		AccessDao accessdao = new AccessDao ();
 		accessdao.insert(this);

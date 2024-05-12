@@ -33,15 +33,18 @@ public class ServletAccess extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	
+	
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Metodo para obtener los valores de los campos del formulario de registro 
+	 * y enviarlos al metodo insert de AccessDao.
+	 * @param name, password, email
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//solicito los valores insertado en el formulario  usando el objeto request y los guardo 
-		//en variables de tipo string en este caso.
-		// el request siempre viaja como String ojo, si tenemos in Int tenemos que usa Interger.ParseInt ...
+		
 		
 		String name = request.getParameter("name");
 		String email= request.getParameter("email");

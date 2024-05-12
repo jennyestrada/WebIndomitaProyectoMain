@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="styles.css/styles.css">
+    <link rel="stylesheet" href="styles.css/styles.css">
+    <script src="scripts/Sessions.js"></script>
 
 
 	 <script type="text/javascript">
@@ -17,8 +18,8 @@
 	// usare el mismo servlet y dao que uso para listar articulos	
 
     window.onload = function() {
-		
-		// XMLHttpRequest Es un obejto de JAVASCRITO, con este obejto lo que hace 
+		launchAuthCheck()
+		// XMLHttpRequest Es un obejto de JAVASCRITO, con este objto lo que hace 
 		// le usuario se hace en segundo plano, es decir no lo saca de la panatalla
 		// si genera un evento.
 		//------------------------------------------------------------------------------
@@ -120,10 +121,13 @@
 				}
 				
  html += '</div>'  				
-			document.getElementById("ArticleList").innerHTML=html;
+			
+			
+document.getElementById("ArticleList").innerHTML=html;
+			
 }
 		
-    </script>
+</script>
     
 
 
@@ -134,14 +138,17 @@
 <body>
     <nav>
        <div class="header-logo" >
-        <img class="responsive-image" src="/imagenes/logo indomita.png" alt="logo indomita">
+        <img class="responsive-image" src="/src/main/webapp/images/logo_indomita.png" alt="logo indomita">
         </div>
         <div>
             <ul class="nav-links"> 
-                <li ><a href="index.html"><p>Inicio</p></a></li>
-                <li ><a href="whoweare.html"><p>Quienes somos</p></a></li>
-                <li ><a href="Loginform.html"><p>Acceso</p></a></li>
-                <li ><a href="Registerform.html"><p>Registro</p></a></li>
+                <li><a href="index.html"><p>Inicio</p></a></li>
+   				<li><a href="whoweare.html"><p>Quienes somos</p></a></li>
+    			<li id="loginLink"><a href="Loginform.html"><p>Acceso</p></a></li>
+    			<li id="registerLink"><a href="Registerform.html"><p>Registro</p></a></li>
+    			<li id="favoritesLink" style="display: none;"><a href="Userarea.html"><p>Favoritos</p></a></li>
+                <li id="adminLink" style="display: none;"><a href="Admiarea.html"><p>Administracion</p></a></li>
+                <li id="logoutLink" style="display: none;"><a href="/ProyectoWebIndomita/ServletCloseSession"><p>Cerrar sesión</p></a></li>
             </ul>
         
         </div>
@@ -151,16 +158,16 @@
     <div class="container">
  		<h1 class="main-title">BIENVENIDO A INDOMITA</h1>
  		
-    <div id="ArticleList">
+    		<div id="ArticleList">
 		
-    </div>	
+    		</div>	
  		
  		
         
  
 
         
-</div> 
+	</div> 
 
 
            

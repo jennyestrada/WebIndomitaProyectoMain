@@ -16,9 +16,8 @@ import modelo.ArticleEditor;
 
 public class ArticleEditorDao {
 	
-	/*
-	 * @Metodo para conectarnos a BDconexion, usamos la clase de java 
-	 * Connection
+	/**
+	 * Metodo para conectarnos a BDconexion
 	 */
 	public static Connection con = null;
 	
@@ -27,14 +26,10 @@ public class ArticleEditorDao {
 	}
 	
 
-	/*
-	 * @Metodo insertar datos de articulo en la BBDD 
-	 * usamos el PreparedStatement preparedstatement
-	 * interregantes por cada valor title, text....
-	 * 
-	 * creamo un objeto de tipo ArticleEditor llamado articleEditor y 
-	 * usando los getters llamamos al title text image...
-		
+	
+	/**
+	 * Metodo para insertar datos de un articulo en la BBDD 
+	 * @param articleEditor el objeto que contiene el articulo que se va insertar.
 	 */
 	
 	public void insert (ArticleEditor articleEditor ) throws SQLException {
@@ -53,12 +48,11 @@ public class ArticleEditorDao {
 		
 	}
 	
-	/*
-	 * @Metodo para actualizar la informacion del articulo, el objeto 
-	 * articleEditor llama al get Id de la clase y le pasa el parametro 
-	 * que se saca de la URL.
-	 */
 	
+	/**
+	 * Metodo para actualizar datos de un articulo en la BBDD 
+	 * @param articleEditor el objeto que contiene el articulo que se va modificar.
+	 */
 	public void update (ArticleEditor articleEditor ) throws SQLException {
 		String sql = "UPDATE article SET TITLE= ?, TEXT= ?, IMAGE= ?,EXCERPT= ?"
 				+ " WHERE id = "+ articleEditor.getId();
@@ -79,16 +73,12 @@ public class ArticleEditorDao {
 	}
 	
 	
-	/*
-	 * @Metodo para borrar un articulo, cerramos el PreparedStatement 
-	 * para liberar recursos y evitar posibles pérdidas de memoria 
-	 * o conexiones no cerradas.Metodo que se llamara desde 
-	 * el Servlet mediante un doGet.
-	 * @param en este caso debe ser un int porque id es int.
-	 * el valor de este viene desde el metodo delete de la clase.
-	 * este sera el id al que se le asigne 1 en la tabla.
-	 */
 	
+	/**
+	 * Metodo para borrar un articulo en la BBDD 
+	 * @param articleId  contiene el Id del  articulo que se va borrar, este id viene del this.getId 
+	 * de la clase ArticleEditor.
+	 */
 	
 	public void delete (int articleId) throws SQLException {
 		String sql = "UPDATE article SET deleted = 1 WHERE id = "+ articleId;
@@ -105,10 +95,10 @@ public class ArticleEditorDao {
 	
 	
 	
-	/*
-	 * @Metodo para obtener y devolver todos los datos del articulo al que corresponda 
-	 * el id.Se crea un objeto, en este se mete la seleccion que hace el execute.
-	 * por tanto este metodo nos devuelve toda la inform. que compone del articulo.
+	/**
+	 * Metodo para obtener un articulo segun el id que se le pasa como parametro.
+	 * @param id del articulo que se quiere obtener.
+	 * @return un articulo completo
 	 */
 	public ArticleEditor articleById(int id) throws SQLException {
 		
@@ -126,30 +116,13 @@ public class ArticleEditorDao {
 
 	
 	
+
 	
 	
-	/*
-	 * @Metodo para obtener datos y meterlos en el arrylist de tipo ArticleEditor
-	 * mediante un select ordenando los datos en orden descendiente.
-	 * y que tome aquellos cuya columna deleted sea 0.
-	 * 
-	 * Envio la selentencia sql que acabo de hacer al PreparedStatement.
-	 * Ejecuto, mediante el "executeQuery" y lo guardo el la variable de tipo
-	 * ResulSet "result"
-	 * 
-	 * Creo un ArrayList "arraylist" aqui meto los datos que trae el "ResultSet result"
-	 * 
-	 * El "arraylist" creado anteriormente, lo meto dentro del bucle while
-	 * y le digo que mientras hayan filas llenas en la variable "result",saque 
-	 * los datos de esta y los añada en el mismo orden en el que
-	 * tenemos ordenada las columnas en la BBDD. 
-	 * 
-	 * Nos devolvera una coleccion que debemos convertir a JSON en el 
-	 * doGet del Servlet.
-	 * 
-	 * Ojo, los SELECT nos devuelven un ResultSet. 
+	/**
+	 * Metodo para obtener la lista de los articulo ordenados en id descendiente
+	 * @return devolvera una lista de articulos que debemos convertir a JSON.
 	 */
-	
 	
 	public ArrayList<ArticleEditor> ArticleList() throws SQLException{
 		

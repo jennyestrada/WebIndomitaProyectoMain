@@ -29,9 +29,12 @@ public class ServletArticleList extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Metodo para traer la lista de articulos desde el Dao.
+	 * PrintWriter imprime la lista de articulos ya convertidos a JSON
+	 * @return una lista de articulos convertidos a JSON
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -39,21 +42,15 @@ public class ServletArticleList extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		
-		/*
-		 * @Metodo para traer la lista de articulos. Creamos un Array 
-		 * "articleList" y llamamos la clase Dao y su metodo "articleList"
-		 * el cual contiene la lista de articulos.
-		 * ahora viene la magia, convertimos esta lista a JSON,
-		 * para ello llamamos a la clase Utils y su metodo "convertToJson"
-		 * ahora creamos una variable de tipo PrintWriter y imprmimos 
-		 * el texto formateado que esta en el objeto "responseJson".
-		 */
+	
+	
 		
 			try {
 				ArrayList<ArticleEditor> articleList = new ArticleEditorDao().ArticleList();
 				String responseJson = new Utils().convertToJson(articleList);
 				PrintWriter printWriterResponse = response.getWriter();
 				printWriterResponse.print(responseJson);
+				
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

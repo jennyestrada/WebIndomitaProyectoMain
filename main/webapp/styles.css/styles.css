@@ -58,9 +58,7 @@ a{
 .flex-column{
     padding-left: 15px;
     padding-right: 15px;
-    /* esto hace falta para que no se incluya el padding en el tamanio de la caja, */
-    /* asi 50% de width es 50% y no 50% mas los 30px del padding*/
-    box-sizing: border-box; 
+ 	box-sizing: border-box; 
 }
 
 .flex-column--15{
@@ -508,8 +506,7 @@ nav .nav-links a p{
 /*ARTICULO*/
 
 .article-img{
-    height: 400px;
-    background-color: grey;
+   
     border-radius: 1%;
     padding: 15px;
 }
@@ -552,6 +549,7 @@ nav .nav-links a p{
     margin-bottom: 20px;
     
  }
+ 
  .primary-button:hover {
     transform: scale(1.03);
  }

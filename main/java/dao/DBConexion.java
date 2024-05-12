@@ -1,13 +1,18 @@
 package dao;
 
 import java.sql.Connection;
+
+
+
+/*
+ * @Metodo de la clase auxiliar DBConexion, establece la conexion con la base de datos
+ * y se puede al ser static se puede llamar desde otras clases.
+ */
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
 public class DBConexion {
-	//CREAMOS CLASE INDEPENDIENTE QUE VA ESTABLECER CONEXION ENTRE JAVA Y BBDD
-	// FINAL ES PORQUE ES UN DATO ESTACTICO QUE NO CAMBIARA 
 	
 	
 	// FINAL ES POR QUE ES ESTATICO NO CAMBIA.

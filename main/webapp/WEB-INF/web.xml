@@ -149,4 +149,14 @@
     <servlet-name>ServletSesionLogin</servlet-name>
     <url-pattern>/ServletSesionLogin</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletCloseSession</display-name>
+    <servlet-name>ServletCloseSession</servlet-name>
+    <servlet-class>controlador.ServletCloseSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletCloseSession</servlet-name>
+    <url-pattern>/ServletCloseSession</url-pattern>
+  </servlet-mapping>
 </web-app>

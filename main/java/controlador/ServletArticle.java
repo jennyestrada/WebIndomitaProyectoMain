@@ -25,12 +25,12 @@ import dao.ArticleEditorDao;
 /**
  * Servlet implementation class ServletArticle
  */
+
+// 	Esto se debe poner cuando se enviar imagenes
 @MultipartConfig
 public class ServletArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	
-	// creo obejto uploads de tipo File y le doy como parametro pathFiles que es el que tiene la ruta guradada
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,23 +39,19 @@ public class ServletArticle extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    
+    
+    
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * Metodo para llamar al metodo de la Dao que trae toda la informacion del articulo
+	 * al que corresponda el Id que se le pasa.
+	 * @retun el articulo en formato JSON
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		/*
-		 * @Metodo creo objeto "article" y llamo al Dao y el metodo que 
-		 * devuelve el articulo completo "articleById(id)", creo otro objeto
-		 * "responseJson" y llamo al metodo que convierte a JSON "convertToJson" 
-		 * le paso el objeto "article" como parametro.
-		 * usamos el PrintWriter para mostrar el objeto que tiene la info
-		 * en formato JSON.La clase de java PrintWriter imprime archivos 
-		 * de texto formateados.
-		 * 
-		 */
-
+		
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			
@@ -78,25 +74,25 @@ public class ServletArticle extends HttpServlet {
 	
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Metodo para insertar editar y borrar.
+	 * si es op 1 llama al metodo insert de la clase.
+	 * si es op 2 llama al metodo update de la clase.
+	 * si es op 3 llama al metodo delete de la clase.
+	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
+	
 		
 		int op = Integer.parseInt(request.getParameter("op"));
 		
 		if (op == 1 || op == 2) {
 			
-			/*
-			 * @Metodo request solo lo lee como string por ello
-			// las imagenes las pasamos a string, en mi caso este
-			// conversion la hace un metodo de la clase Utils. 
-			 * OJO importante usamos enctype="multipart/form-data 
-			 * asi que en el servlet ponemos @MultipartConfig
-			 * para que lea el part.
-			 */
 			
-			
+		
+		
 			
 			String title = request.getParameter("title");
 			String text = request.getParameter("text");
@@ -112,16 +108,19 @@ public class ServletArticle extends HttpServlet {
 				ArticleEditor articleEditor = new ArticleEditor (title,text,fileName,excerpt);
 				try {
 					articleEditor.insert();
+					response.sendRedirect("articlelist.html");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}else if(op == 2) {
+				// toma el name id de campo oculto.
 				int id = Integer.parseInt(request.getParameter("id"));
 				ArticleEditor articleEditor = new ArticleEditor(id,title,text,fileName,excerpt);
 			
 				try {
 					articleEditor.update();
+					response.sendRedirect("articlelist.html");
 				} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -130,10 +129,14 @@ public class ServletArticle extends HttpServlet {
 			}
 			
 		}else if (op == 3) {
+			// es igual que sacar los datos de los campos title text exerpt, con el request pedimos el 
+			// valor del name id y lo metemos en una variable en este caso varible int id.
+			// en el caso de borrar el id es un input hidden. igualpara actualizar.
 			int id = Integer.parseInt(request.getParameter("id"));
 			ArticleEditor articleEditor = new ArticleEditor(id);
 			try {
 				articleEditor.delete();
+				response.sendRedirect("articlelist.html");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -143,10 +146,6 @@ public class ServletArticle extends HttpServlet {
 		
 		
 		
-		/*
-		 * @param creo variable op y guardo el parametro extraido de la URL
-		 * en javaScript, es necesario parsearlo
-		 */
 		
 		
 		

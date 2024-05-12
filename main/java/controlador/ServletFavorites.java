@@ -5,12 +5,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import modelo.Access;
 import modelo.ArticleEditor;
+import modelo.Utils;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dao.ArtiFavoritesDao;
+import dao.ArticleEditorDao;
 
 
 /**
@@ -18,7 +24,7 @@ import dao.ArtiFavoritesDao;
  */
 public class ServletFavorites extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	HttpSession session;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,9 +32,12 @@ public class ServletFavorites extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Metodo para obtener la lista de los articulo favoritos de el usuario que esta logueado.
+	 * @return devolvera una lista de articulos favoritos convertida a JSON.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -37,9 +46,22 @@ public class ServletFavorites extends HttpServlet {
 		
 		
 		
+		session = request.getSession();
+		int idUser = (int) session.getAttribute("id");
+	
 		
-		
-		
+		try {
+			ArrayList<ArticleEditor> articleFavoritesList = new ArtiFavoritesDao().articleFavoritesList(idUser);
+			String responseJson = new Utils().convertToJson(articleFavoritesList);
+			PrintWriter printWriterResponse = response.getWriter();
+			printWriterResponse.print(responseJson);
+			System.out.println(" prueba a ver si traer articulos "+ responseJson);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	
 		
 	}
 	
@@ -47,18 +69,21 @@ public class ServletFavorites extends HttpServlet {
 	
 	
 	
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Metodo para insertar los articulos favoritos de un usuario logueado.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-
-		//Obtener los valores de los campos hidden del form
-		// 
+		session = request.getSession();
+		
+		
+		//Obtener los valores de los campos hidden del formulario
+		
+		
+		
 		int idArticle = Integer.parseInt(request.getParameter("hiddenIdArticle"));
-		int idAccess = Integer.parseInt(request.getParameter("hiddenIdAccess"));
+		int idAccess = (int) session.getAttribute("id");
 		
 		
 		try {
