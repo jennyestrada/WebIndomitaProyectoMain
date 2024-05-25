@@ -7,11 +7,16 @@ import java.sql.SQLException;
 import dao.AccessDao;
 
 
+
 /**
- * @author jenny Estrada Sanabria
+ * @author jenny Estrada Sanabria. Version 0.7 Indomita Creativa.
+ * 
+ *  
  */
 
-
+/**
+ * Esta Clase Provee los metodos y atributos necesarios para gestionar el acceso de usuarios.
+ */
 public class Access {
     private int id=0;
 	private String fullname;

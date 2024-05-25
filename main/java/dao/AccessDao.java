@@ -10,6 +10,11 @@ import com.google.gson.Gson;
 
 import modelo.Access;
 
+
+
+/**
+ * Esta clase Dao conecta y trabaja con los datos de acceso almacenados en la BBDD de la aplicacion
+ */
 public class AccessDao {
 	// patron Singelton aun mejor. son soluciones genericas a problemas que ya estan hechos.
 	

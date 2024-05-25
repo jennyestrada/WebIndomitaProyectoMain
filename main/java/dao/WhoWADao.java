@@ -6,6 +6,11 @@ import java.sql.SQLException;
 
 import modelo.WhoWAEditor;
 
+
+/**
+ * Clase para insertar informacion en la la pagina 	Quienes somos.
+ */
+
 public class WhoWADao {
 	
 	public static Connection con = null;

@@ -4,13 +4,18 @@ import java.sql.Connection;
 
 
 
-/*
- * @Metodo de la clase auxiliar DBConexion, establece la conexion con la base de datos
- * y se puede al ser static se puede llamar desde otras clases.
- */
+
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
+
+
+/**
+ * Clase auxiliar DBConexion, establece la conexion con la base de datos
+ * es un metodo static, se puede llamar desde otras clases.
+ */
 
 public class DBConexion {
 	

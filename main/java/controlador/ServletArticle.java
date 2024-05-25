@@ -1,3 +1,8 @@
+
+    /**
+	 * provee los Servlets necesario para las fucnionalidades de los articulos
+	 */
+
 package controlador;
 
 import jakarta.servlet.ServletException;
@@ -23,7 +28,7 @@ import java.util.ArrayList;
 import dao.ArticleEditorDao;
 
 /**
- * Servlet implementation class ServletArticle
+ * Este Servlet gestiona las peticiones y respuestas relacionadas con la gestion del articulo.
  */
 
 // 	Esto se debe poner cuando se enviar imagenes

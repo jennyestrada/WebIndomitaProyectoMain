@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 
 /**
- * Servlet implementation class ServletLogin
+ * Esta clase gestion la sesion de un usuario
  */
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;

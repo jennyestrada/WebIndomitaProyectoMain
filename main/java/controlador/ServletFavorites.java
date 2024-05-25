@@ -20,7 +20,8 @@ import dao.ArticleEditorDao;
 
 
 /**
- * Servlet implementation class ServletFavorites
+ * Esta tiene dos metodo, uno para añadir los articulos favoritos de un usuario 
+ * y otro para listar estos articulos.
  */
 public class ServletFavorites extends HttpServlet {
 	private static final long serialVersionUID = 1L;

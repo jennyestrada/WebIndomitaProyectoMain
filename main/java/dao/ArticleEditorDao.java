@@ -1,6 +1,10 @@
+
+
 package dao;
 
 import java.sql.Connection;
+
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +18,9 @@ import dao.DBConexion;
 
 import modelo.ArticleEditor;
 
+/**
+ * Esta clase Dao conecta y trabaja con los datos de los articulos almacenados en la  BBDD de la aplicacion
+ */
 public class ArticleEditorDao {
 	
 	/**

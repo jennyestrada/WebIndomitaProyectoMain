@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Servlet implementation class ServletCloseSession
+ * Esta tiene un metodo para cerrar la  sesión de un usuario
  */
 public class ServletCloseSession extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +37,7 @@ public class ServletCloseSession extends HttpServlet {
 		 session.invalidate();
 		 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
 		 dispatcher.forward(request, response);
+		 
 
 		
 	}

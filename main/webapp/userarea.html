@@ -52,32 +52,25 @@
 			 let html = " ";
 			 
 			 
-			 for (let i=0;i<results.length; i++)
-			 
-	 	html += '<div class="flex-column flex-column flex-column--50  relative-position mt-15">'   
-			 
-		 	html += '<div class="article-box__img" style="background-image: url(\'images/' + results[i].image + '\');">';
-           	 html +=   '<p >Eliminar de favoritos</p>'
-            	html +=  '</div>'    
-                     
-             	html +=   '<div>'
-                                
-              	html += '<div class="main-paragraph main-paragraph--blue mt-15 mb-15">'
-                    html += '<h3>'+results[i].title +'</h3>'
-                
-                      html +=  '<p>' + results[i].excerpt + '</p>'
-                       html +=   '<div class="article-box__small">'
-                              
-                     	html +=   '<a href="article.html?id='+ results[i].id+'"><button class="primary-button mt-15 width-100 d-block" type="button">Leer artículo</button></a>'  
- 
-                            
-                        	html +=   '</div>'
-
-                    html +=   '</div>'
-                   html +=   '</div>'
-			
-			 html +=   '<div>'
+			 for (let i=0;i<results.length; i++){
+		 html += '<div class="flex-column flex-column flex-column--50 relative-position mt-15">';
+    html +=     '<div class="article-box__img" style="background-image: url(\'images/' + results[i].image + '\');">';
+    html +=         '<p>Eliminar de favoritos</p>';
+    html +=     '</div>';
+    html +=     '<div>';
+    html +=         '<div class="main-paragraph main-paragraph--blue mt-15 mb-15">';
+    html +=             '<h3>' + results[i].title + '</h3>';
+    html +=             '<p>' + results[i].excerpt + '</p>';
+    html +=             '<div class="article-box__small">';
+    html +=                 '<a href="article.html?id=' + results[i].id + '"><button class="primary-button mt-15 width-100 d-block" type="button">Leer artículo</button></a>';
+    html +=             '</div>';
+    html +=         '</div>';
+    html +=     '</div>';
+    html += '</div>';
 				 
+			 }
+			 
+	 	
 				 
 			document.getElementById("favoritesArticleList").innerHTML=html;
 
@@ -88,7 +81,8 @@
 <body>
     <nav>
         <div class="header-logo" >
-         <img class="responsive-image" src="/imagenes/logo indomita.png" alt="logo indomita">
+          <img class="responsive-image" src="./images/logo_indomita.png" alt="logo indomita" style="width: 180px; height: auto; margin-bottom: 15px;">
+
          </div>
          <div>
              <ul class="nav-links"> 
@@ -108,83 +102,16 @@
 
         <div class="container">
             <h1 class="main-title">AREA USUARIO</h1>
-            <div class="row">
+           	 <div id="favoritesArticleList" class="row">
 				
-				<div id="favoritesArticleList">
-		
-    			</div>	
-        
-                        
-                  
-                </div> 
+             </div> 
 
-                <div class="flex-column flex-column flex-column--50  relative-position mt-15">          
-                    <div class="article-box__img main-paragraph--blue main-paragraph">
-                        <p >Eliminar de favoritos</p>
-                     </div>    
-                     
-                     <div>
-                                
-                        <div class="main-paragraph main-paragraph--blue mt-15 mb-15">
-                            <h3>Título artículo 2</h3>
-                
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Phasellus eleifend sodales dolor, feugiat tincidunt turpis 
-                            eleifend ut.</p>
-                            <div class="article-box__small">
-                                <p>Leer artículo</p>   
-                            
-                            </div>
-
-                        </div>
-                    </div>
-                </div> 
+               
 
 
-                <div class="flex-column flex-column flex-column--50  relative-position mt-15">          
-                    <div class="article-box__img main-paragraph--blue main-paragraph">
-                        <p >Eliminar de favoritos</p>
-                     </div>    
-                     
-                     <div>
-                                
-                        
-                        <div class="main-paragraph main-paragraph--blue mt-15 mb-15">
-                            <h3>Título artículo 3</h3>
-                
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Phasellus eleifend sodales dolor, feugiat tincidunt turpis 
-                            eleifend ut.</p>
-                            <div class="article-box__small">
-                                <p>Leer artículo</p>   
-                            
-                            </div>
+             
 
-                        </div>
-                    </div>
-                </div> 
-
-                <div class="flex-column flex-column flex-column--50  relative-position mt-15">          
-                    <div class="article-box__img main-paragraph--blue main-paragraph">
-                        <p >Eliminar de favoritos</p>
-                     </div>    
-                     
-                     <div>
-                                
-                        <div class="main-paragraph main-paragraph--blue mt-15 mb-15">
-                            <h3>Título artículo 4</h3>
-                
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Phasellus eleifend sodales dolor, feugiat tincidunt turpis 
-                            eleifend ut.</p>
-                            <div class="article-box__small">
-                                <p>Leer artículo</p>   
-                            
-                            </div>
-
-                        </div>
-                    </div>
-                </div> 
+             
 
             </div>
 

@@ -40,8 +40,11 @@
              xhr.send();
              console.log(results)  
              
-             // si fullname no traer nombre no se ha logueado nadie.
-             if (results.fullname != ""){
+             // comprueba si la var result tiene los datos de la sesion, si los tiene ejecuta la funcion
+             // LinksbyAuthentication. 
+             // si la result esta vacia, no hace nada se muestta el menu que se hizo en html por defecto. 
+             // no cumple la condicion para ejeuctar la fucnion LinksbyAuthentication.
+             if (results != null){
            
 		     	LinksbyAuthentication(results.isAdmin);
 		     }

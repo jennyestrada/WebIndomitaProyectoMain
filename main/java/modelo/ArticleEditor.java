@@ -1,6 +1,9 @@
+
+
 package modelo;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.google.gson.Gson;
 
@@ -9,18 +12,21 @@ import dao.ArticleEditorDao;
 
 
 /**
- * @Author: Jenny Estrada Sanabria
+ * Esta Clase Provee los metodos y atributos necesarios para gestionar los articulos.
  */
-
-
 public class ArticleEditor {
+	
 	private int id;
+	
 	private String title;
+	
 	private String text;
+	
 	private String image;
+	
 	private String excerpt;
 	
-	
+	private List<Comment> comments;
 	
 	
 	
@@ -61,6 +67,9 @@ public class ArticleEditor {
 		this.text = text;
 		this.image = image;
 	}
+	
+	
+
 
 
 
@@ -178,6 +187,20 @@ public class ArticleEditor {
 	@Override
 	public String toString() {
 		return "ArticleEditor [title=" + title + ", text=" + text + ", image=" + image + ", excerpt=" + excerpt + "]";
+	}
+
+
+
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+
+
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 	
 	

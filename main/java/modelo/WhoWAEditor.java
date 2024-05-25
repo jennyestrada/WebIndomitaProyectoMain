@@ -4,10 +4,18 @@ import java.sql.SQLException;
 
 import dao.WhoWADao;
 
+
+
+
+/**
+ * Esta Clase Provee los metodos y atributos necesarios para gestionar quienes somos.
+ */
 public class WhoWAEditor {
 	private String title;
 	private String text;
 	private String image;
+	
+	
 	
 	
 	

@@ -1,3 +1,4 @@
+
 package controlador;
 
 
@@ -13,8 +14,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Servlet implementation class ServletAccess
+ * Este Servlet gestiona las peticiones y respuestas relacionadas con la gestion del usuario.
  */
+
 public class ServletAccess extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

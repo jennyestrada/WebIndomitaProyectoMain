@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.Connection;
+
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +10,12 @@ import java.util.ArrayList;
 
 import modelo.Access;
 import modelo.ArticleEditor;
+
+
+/**
+ * Esta clase Dao conecta y trabaja con los datos de los articulos favoritos de los usuarios
+ * almacenados en la  BBDD de la aplicacion
+ */
 
 public class ArtiFavoritesDao {
 	
@@ -48,7 +56,7 @@ public static Connection con = null;
 		ArrayList<ArticleEditor> favoriteArticles = new ArrayList<>();
 	    
 		
-	    String sql = "SELECT a.ID, a.TITLE, a.IMAGE, a.EXCERPT FROM article a " +
+	    String sql = "SELECT a.ID, a.TITLE, a.TEXT, a.IMAGE, a.EXCERPT FROM article a " +
                 "INNER JOIN favorite_articles af ON a.ID= af.ID_ARTICLE " +
                 "WHERE af.ID_ACCESS = ? AND a.DELETED = 0 " +
                 "ORDER BY a.id DESC";
@@ -64,6 +72,7 @@ public static Connection con = null;
             ArticleEditor article = new ArticleEditor(
                 result.getInt("id"),
                 result.getString("title"),
+                result.getString("text"),
                 result.getString("image"),
                 result.getString("excerpt")
             );

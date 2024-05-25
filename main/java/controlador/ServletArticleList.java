@@ -16,8 +16,9 @@ import java.util.ArrayList;
 import dao.AccessDao;
 import dao.ArticleEditorDao;
 
+
 /**
- * Servlet implementation class ServletListImages
+ * Esta clase trae la lista de articulos de la BBDD y los devuelve como JSON
  */
 public class ServletArticleList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
