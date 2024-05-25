@@ -5,20 +5,14 @@ public class Comment {
 	private String comment;
 	private Access commentUser;
 	
-	
-	
-	
-	
-	
-	
+
 	
 	public Comment() {
 		super();
 	}
 
 	
-	
-	
+
 	
 	/**
 	 * metodo constructor para obtener comentario y el autor del comentario
